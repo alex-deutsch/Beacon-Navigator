@@ -7,12 +7,23 @@
 //
 
 import UIKit
+import CoreLocation
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, CLLocationManagerDelegate, NSURLConnectionDelegate {
+    
+    let region = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D"), identifier: "Estimotes")
+    let locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager.delegate = self
+        if CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedAlways {
+                locationManager.requestAlwaysAuthorization()
+        }
         // Do any additional setup after loading the view, typically from a nib.
+        locationManager.startRangingBeaconsInRegion(region)
+        locationManager.startMonitoringForRegion(region)
+        region.notifyEntryStateOnDisplay = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +31,13 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
+
+    }
+    
+    func locationManager(manager: CLLocationManager!, rangingBeaconsDidFailForRegion region: CLBeaconRegion!, withError error: NSError!) {
+        
+    }
 
 }
 
