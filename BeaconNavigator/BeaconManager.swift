@@ -41,7 +41,7 @@ class BeaconManager : NSObject, CLLocationManagerDelegate {
         
         currentAvailableBeacons = beacons as! [CLBeacon]
         allKnownBeacons += beacons as! [CLBeacon]
-        
+
         NSNotificationCenter.defaultCenter().postNotificationName(BeaconManagerDidUpdateAvailableBeacons, object: nil, userInfo: ["beacons":beacons])
     }
     

@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		FA28FE521B2893E5004F2666 /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28FE511B2893E5004F2666 /* BeaconManager.swift */; };
+		FA28FE551B29D94C004F2666 /* BeaconMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28FE541B29D94C004F2666 /* BeaconMapView.swift */; };
+		FA28FE571B29DBC6004F2666 /* BeaconMapChooserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28FE561B29DBC6004F2666 /* BeaconMapChooserTableViewController.swift */; };
+		FA28FE591B29DC1A004F2666 /* BeaconMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28FE581B29DC1A004F2666 /* BeaconMapManager.swift */; };
+		FA28FE5F1B2A46A2004F2666 /* BeaconMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28FE5E1B2A46A2004F2666 /* BeaconMapViewController.swift */; };
 		FA66F0851B27A11200930851 /* BeaconTrilaterationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA66F0841B27A11200930851 /* BeaconTrilaterationController.swift */; };
 		FA66F0871B27A62D00930851 /* BeaconMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA66F0861B27A62D00930851 /* BeaconMap.swift */; };
 		FA66F08B1B2889D700930851 /* map1.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA66F08A1B2889D700930851 /* map1.plist */; };
@@ -33,6 +37,10 @@
 
 /* Begin PBXFileReference section */
 		FA28FE511B2893E5004F2666 /* BeaconManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconManager.swift; sourceTree = "<group>"; };
+		FA28FE541B29D94C004F2666 /* BeaconMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconMapView.swift; sourceTree = "<group>"; };
+		FA28FE561B29DBC6004F2666 /* BeaconMapChooserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconMapChooserTableViewController.swift; sourceTree = "<group>"; };
+		FA28FE581B29DC1A004F2666 /* BeaconMapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconMapManager.swift; sourceTree = "<group>"; };
+		FA28FE5E1B2A46A2004F2666 /* BeaconMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconMapViewController.swift; sourceTree = "<group>"; };
 		FA66F0841B27A11200930851 /* BeaconTrilaterationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconTrilaterationController.swift; sourceTree = "<group>"; };
 		FA66F0861B27A62D00930851 /* BeaconMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconMap.swift; sourceTree = "<group>"; };
 		FA66F08A1B2889D700930851 /* map1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = map1.plist; sourceTree = "<group>"; };
@@ -71,9 +79,19 @@
 		FA28FE501B28913F004F2666 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FA28FE511B2893E5004F2666 /* BeaconManager.swift */,
+				FA28FE581B29DC1A004F2666 /* BeaconMapManager.swift */,
 				FA66F0841B27A11200930851 /* BeaconTrilaterationController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		FA28FE531B29D92B004F2666 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FA28FE541B29D94C004F2666 /* BeaconMapView.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		FA66F08C1B2889DA00930851 /* Beacon Maps */ = {
@@ -88,8 +106,9 @@
 			isa = PBXGroup;
 			children = (
 				FAF91DBC1B0A3A8F0002278C /* ViewController.swift */,
-				FA28FE511B2893E5004F2666 /* BeaconManager.swift */,
+				FA28FE561B29DBC6004F2666 /* BeaconMapChooserTableViewController.swift */,
 				FA66F08F1B2890E900930851 /* BeaconTableViewController.swift */,
+				FA28FE5E1B2A46A2004F2666 /* BeaconMapViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -125,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				FAF91DB71B0A3A8F0002278C /* AppDelegate.swift */,
+				FA28FE531B29D92B004F2666 /* View */,
 				FA66F0911B2890EF00930851 /* ViewController */,
 				FA28FE501B28913F004F2666 /* Controller */,
 				FA66F0921B2890F600930851 /* Model */,
@@ -263,13 +283,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA28FE591B29DC1A004F2666 /* BeaconMapManager.swift in Sources */,
 				FAF91DBD1B0A3A8F0002278C /* ViewController.swift in Sources */,
 				FAF91DB81B0A3A8F0002278C /* AppDelegate.swift in Sources */,
 				FA66F0851B27A11200930851 /* BeaconTrilaterationController.swift in Sources */,
 				FA66F0871B27A62D00930851 /* BeaconMap.swift in Sources */,
 				FAF91DBB1B0A3A8F0002278C /* BeaconNavigator.xcdatamodeld in Sources */,
 				FA66F0901B2890E900930851 /* BeaconTableViewController.swift in Sources */,
+				FA28FE5F1B2A46A2004F2666 /* BeaconMapViewController.swift in Sources */,
 				FA28FE521B2893E5004F2666 /* BeaconManager.swift in Sources */,
+				FA28FE551B29D94C004F2666 /* BeaconMapView.swift in Sources */,
+				FA28FE571B29DBC6004F2666 /* BeaconMapChooserTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
