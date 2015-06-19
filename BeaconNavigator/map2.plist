@@ -14,25 +14,13 @@
 			<key>x</key>
 			<integer>0</integer>
 			<key>y</key>
-			<integer>5</integer>
-		</dict>
-		<dict>
-			<key>x</key>
-			<integer>5</integer>
-			<key>y</key>
-			<integer>5</integer>
-		</dict>
-		<dict>
-			<key>x</key>
-			<integer>5</integer>
-			<key>y</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>x</key>
 			<integer>3</integer>
 			<key>y</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>x</key>
@@ -46,7 +34,7 @@
 		<key>21604</key>
 		<dict>
 			<key>x</key>
-			<integer>0</integer>
+			<real>1.5</real>
 			<key>y</key>
 			<integer>0</integer>
 		</dict>
@@ -55,14 +43,14 @@
 			<key>x</key>
 			<integer>3</integer>
 			<key>y</key>
-			<integer>0</integer>
+			<integer>3</integer>
 		</dict>
 		<key>45301</key>
 		<dict>
 			<key>x</key>
-			<integer>5</integer>
+			<integer>0</integer>
 			<key>y</key>
-			<integer>5</integer>
+			<integer>3</integer>
 		</dict>
 	</dict>
 </dict>

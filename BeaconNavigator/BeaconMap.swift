@@ -13,30 +13,28 @@ import UIKit
 class BeaconMap {
     
     
-    var name : String
+    let name : String
+    var edgeCoordinates : [CGPoint] = []
     
-
-    var size : CGSize = CGSizeZero
     // Beacon Minor Value(Int) : Point(CGPoint)
     private var beaconCoordinates : [Int : CGPoint] = [:]
     
     required init(fileName : String) {
         if  let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "plist"),
             let dictionary = NSDictionary(contentsOfFile: path),
-            let sizeDictionary = dictionary["size"] as? Dictionary<String,NSNumber>,
-            let beaconDictionary = dictionary["beacons"] as? Dictionary<String,AnyObject>,
-            let height = sizeDictionary["height"],
-            let width = sizeDictionary["width"] {
+            let beacons = dictionary["beacons"] as? Dictionary<String,Dictionary<String,NSNumber>>,
+            let edges = dictionary["edges"] as? Array<Dictionary<String,NSNumber>> {
             
-                // Read Map Size
-                size = CGSizeMake(CGFloat(width.floatValue), CGFloat(height.floatValue))
+                // Read Edges
+                for edge in edges {
+                    let edgePoint = CGPointMake(CGFloat(edge["x"]!.floatValue), CGFloat(edge["y"]!.floatValue))
+                    edgeCoordinates.append(edgePoint)
+                }
                 
                 // Read Beacon Coordinates
-                for (key, value) in beaconDictionary {
-                    if value.count == 2 {
-                        let coordinate = CGPoint(x: value[0].integerValue, y: value[1].integerValue)
-                        beaconCoordinates[key.toInt()!] = coordinate
-                    }
+                for (beaconMinor, coordinate) in beacons {
+                    let coordinate = CGPoint(x: CGFloat(coordinate["x"]!.floatValue), y: CGFloat(coordinate["y"]!.floatValue))
+                    beaconCoordinates[beaconMinor.toInt()!] = coordinate
                     
                 }
         }
@@ -69,5 +67,12 @@ class BeaconMap {
             }
         }
         return beaconCoordinates
+    }
+    
+    /* Check if that beacon is on that map 
+    @return boolean value if the beacon positioned on in this map
+    */
+    func beaconIsOnMap(beacon : CLBeacon) -> Bool {
+        return contains(beaconCoordinates.keys.array, beacon.minor.integerValue)
     }
 }
