@@ -8,11 +8,29 @@
 
 import UIKit
 
+let UserDefinedPositionSetNotification = "UserDefinedPositionSetNotification"
+
 class BeaconMapView : UIView {
     
-    let beaconPointColor : UIColor = .blueColor()
-    let roomBorderColor : UIColor = .grayColor()
-    let positionPointColor : UIColor = .redColor()
+    // Scale for Drawing in Coordinate System
+    var scaleX : CGFloat = 1
+    var scaleY : CGFloat = 1
+    var scaleXY : CGFloat = 1
+    
+    
+    // can set by touching the view
+    var userdefinedPosition : CGPoint? {
+        didSet {
+            NSNotificationCenter.defaultCenter().postNotificationName(UserDefinedPositionSetNotification, object: self)
+            self.setNeedsDisplay()
+        }
+    }
+    
+    var trackedPositions : [CGPoint]? {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
     
     var edgePoints : [CGPoint]? {
         didSet {
@@ -27,8 +45,15 @@ class BeaconMapView : UIView {
         }
     }
     
-    // Minor Distance
+    // Minor : Distance
     var beaconDistances : [Int:CGFloat] = [:] {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+    
+    // Used Beacons for position calc
+    var usedBeacons : [Int] = [] {
         didSet {
             self.setNeedsDisplay()
         }
@@ -54,10 +79,11 @@ class BeaconMapView : UIView {
         
         var adjustedMapSize = CGSizeMake(biggestX, biggestY)
         
-        // Check which sides are the bigger ones 
+        // Check which sides are the bigger ones
         if (rect.width > rect.height && biggestY > biggestX) || (rect.height > rect.width && biggestY < biggestX) {
             // rotate map to fit view
-            adjustedMapSize = CGSizeMake(biggestY, biggestX)
+            // TODO: this is buggy
+            //adjustedMapSize = CGSizeMake(biggestY, biggestX)
         }
         
         // Scale View according map size
@@ -69,9 +95,9 @@ class BeaconMapView : UIView {
         
         
         // Scale for Drawing in Coordinate System
-        let scaleX = rectForRoom.width / adjustedMapSize.width
-        let scaleY = rectForRoom.height / adjustedMapSize.height
-        let scaleXY = min(scaleX,scaleY)
+        scaleX = rectForRoom.width / adjustedMapSize.width
+        scaleY = rectForRoom.height / adjustedMapSize.height
+        scaleXY = min(scaleX,scaleY)
         
         // Draw Edges and lines  (Walls)
         if edgePoints?.count > 0 {
@@ -97,44 +123,68 @@ class BeaconMapView : UIView {
         // Draw Beacon Points
         if let beaconPoints = beaconPoints {
             for (minor, beaconPoint) in beaconPoints {
-                beaconPointColor.setFill()
-                let drawingRect = CGRectMake(beaconPoint.x * scaleXY - 10, beaconPoint.y * scaleXY - 10, 20, 20)
-                let pointPath = UIBezierPath(ovalInRect: drawingRect)
-                pointPath.fill()
-                pointPath.closePath()
+                if contains(usedBeacons, minor) {
+                    drawPointAtPosition(beaconPoint, color: beaconPointColorUsed)
+                }
+                else {
+                    drawPointAtPosition(beaconPoint, color: beaconPointColor)
+                }
                 
                 if let distance = beaconDistances[minor] {
-                    let distanceRect = CGRectMake((beaconPoint.x - distance) * scaleX, (beaconPoint.y - distance) * scaleXY, distance * 2 * scaleXY, distance * 2 * scaleXY)
+                    let distanceRect = CGRectMake((beaconPoint.x - distance) * scaleXY, (beaconPoint.y - distance) * scaleXY, distance * 2 * scaleXY, distance * 2 * scaleXY)
                     let distancePath = UIBezierPath(ovalInRect: distanceRect)
                     distancePath.lineWidth = 3
-                    UIColor.redColor().setStroke()
+                    UIColor.lightGrayColor().setStroke()
                     distancePath.stroke()
                     distancePath.closePath()
                 }
             }
         }
         
-        // Draw current Position
-        if let currentPosition = currentPosition {
-            positionPointColor.setFill()
-            let pointPath = UIBezierPath(ovalInRect: CGRectMake(currentPosition.x * scaleXY - 10, currentPosition.y * scaleXY - 10, 20, 20))
-            pointPath.fill()
-            
-            // Draw dashed lines from every beacon to my position
-            if let beaconPoints = beaconPoints {
-                for (minor, beaconPoint) in beaconPoints {
-                    beaconPointColor.setStroke()
-                    let linePath = UIBezierPath()
-                    linePath.moveToPoint(CGPointMake(beaconPoint.x * scaleXY, beaconPoint.y * scaleXY))
-                    let drawingRect = CGRectMake(beaconPoint.x * scaleXY - 10, beaconPoint.y * scaleXY - 10, 20, 20)
-                    let pointPath = UIBezierPath(ovalInRect: drawingRect)
-                    linePath.stroke()
-                    pointPath.closePath()
-                }
-            }
-            
+        // Draw User defined position
+        if let userdefinedPosition = userdefinedPosition {
+            drawPointAtPosition(userdefinedPosition, color: userDefpositionPointColor)
         }
         
+        // Draw tracked position
+        if let trackedPositions = trackedPositions {
+            for position in trackedPositions {
+                drawPointAtPosition(position, color: usertrackingPositionPointColor)
+            }
+        }
+        
+        // Draw current Position
+        if let currentPosition = currentPosition {
+            drawPointAtPosition(currentPosition, color: positionPointColor)
+        }
+        
+        // Draw User Defined Position
         super.drawRect(rect)
+    }
+    
+    func drawPointAtPosition(position : CGPoint, color: UIColor) {
+        color.setFill()
+        let pointPath = UIBezierPath(ovalInRect: CGRectMake(position.x * scaleXY - 10, position.y * scaleXY - 10, 20, 20))
+        pointPath.fill()
+        pointPath.closePath()
+    }
+    
+    func setUserDefinedPositionFromTouch(touch : UITouch?) {
+        if let locationInView = touch?.locationInView(self) {
+            userdefinedPosition = CGPointMake(locationInView.x / scaleXY, locationInView.y / scaleXY)
+        }
+    }
+    
+    // Track Touches to set User Defined Position
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        super.touchesBegan(touches, withEvent: event)
+        let touch = touches.first as? UITouch
+        setUserDefinedPositionFromTouch(touch)
+    }
+    
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+        super.touchesMoved(touches, withEvent: event)
+        let touch = touches.first as? UITouch
+        setUserDefinedPositionFromTouch(touch)
     }
 }

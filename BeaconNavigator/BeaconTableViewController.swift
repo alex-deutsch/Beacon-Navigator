@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import Foundation
 
 class BeaconTableViewController: UITableViewController, CLLocationManagerDelegate {
     
@@ -41,7 +42,8 @@ class BeaconTableViewController: UITableViewController, CLLocationManagerDelegat
     }
     
     func didUpdateBeacons(notification : NSNotification) {
-        beacons = notification.userInfo!["beacons"] as? [CLBeacon]
+        var updatedBeacons : [CLBeacon] = notification.userInfo!["beacons"] as! [CLBeacon]
+        beacons = updatedBeacons
         tableView.reloadData()
     }
 }

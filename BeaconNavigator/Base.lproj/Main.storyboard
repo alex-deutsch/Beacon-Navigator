@@ -2,6 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14E7f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6Li-1U-M9K">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -33,8 +35,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJ7-uI-B9d">
-                                <rect key="frame" x="116" y="323" width="143" height="30"/>
+                                <rect key="frame" x="108" y="292" width="267" height="83"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Beacon List">
+                                    <color key="titleColor" red="0.31372549019607843" green="0.66666666666666663" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -42,34 +46,58 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3KW-0u-M5u">
-                                <rect key="frame" x="116" y="183" width="143" height="45"/>
+                                <rect key="frame" x="108" y="163" width="267" height="83"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="8WA-rA-Ybx"/>
-                                    <constraint firstAttribute="width" constant="143" id="QYr-6b-n1Z"/>
+                                    <constraint firstAttribute="height" constant="83" id="Kgs-Cc-c7x"/>
+                                    <constraint firstAttribute="width" constant="267" id="ilQ-UD-ZwU"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Navigation Maps">
+                                    <color key="titleColor" red="0.31372549019607843" green="0.66666666666666663" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="jPD-I4-FQY" kind="show" id="hUW-VQ-b8D"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ibeacon-logo" translatesAutoresizingMaskIntoConstraints="NO" id="NiG-Mk-0fz">
+                                <rect key="frame" x="25" y="292" width="83" height="83"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ibeacon-logo" translatesAutoresizingMaskIntoConstraints="NO" id="IVr-Rw-7R7">
+                                <rect key="frame" x="25" y="163" width="83" height="83"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="3KW-0u-M5u" secondAttribute="centerX" id="0Lm-dv-KTz"/>
+                            <constraint firstItem="3KW-0u-M5u" firstAttribute="leading" secondItem="lJ7-uI-B9d" secondAttribute="leading" id="0PC-uL-9tD"/>
                             <constraint firstAttribute="centerX" secondItem="lJ7-uI-B9d" secondAttribute="centerX" id="2C1-0C-z0Z"/>
-                            <constraint firstItem="lJ7-uI-B9d" firstAttribute="top" secondItem="3KW-0u-M5u" secondAttribute="bottom" constant="95" id="2KH-QO-BOF"/>
-                            <constraint firstItem="3KW-0u-M5u" firstAttribute="leading" secondItem="lJ7-uI-B9d" secondAttribute="leading" id="biv-R7-pCQ"/>
-                            <constraint firstItem="3KW-0u-M5u" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="119" id="l3A-H5-Svk"/>
+                            <constraint firstItem="3KW-0u-M5u" firstAttribute="trailing" secondItem="lJ7-uI-B9d" secondAttribute="trailing" id="F03-oe-qqs"/>
+                            <constraint firstItem="3KW-0u-M5u" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="99" id="HvS-UE-ZVs"/>
+                            <constraint firstItem="IVr-Rw-7R7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="9" id="Ife-tO-GxA"/>
+                            <constraint firstItem="NiG-Mk-0fz" firstAttribute="top" secondItem="IVr-Rw-7R7" secondAttribute="bottom" constant="46" id="N37-YT-llz"/>
+                            <constraint firstItem="3KW-0u-M5u" firstAttribute="bottom" secondItem="IVr-Rw-7R7" secondAttribute="bottom" id="XTK-U9-3rB"/>
+                            <constraint firstItem="3KW-0u-M5u" firstAttribute="leading" secondItem="IVr-Rw-7R7" secondAttribute="trailing" id="Xg3-oq-GNH"/>
+                            <constraint firstItem="IVr-Rw-7R7" firstAttribute="leading" secondItem="NiG-Mk-0fz" secondAttribute="leading" id="jFg-Gl-kgN"/>
+                            <constraint firstItem="lJ7-uI-B9d" firstAttribute="top" secondItem="3KW-0u-M5u" secondAttribute="bottom" constant="46" id="sIo-Hf-41l"/>
+                            <constraint firstItem="NiG-Mk-0fz" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="uPu-ko-QYR"/>
+                            <constraint firstItem="NiG-Mk-0fz" firstAttribute="width" secondItem="IVr-Rw-7R7" secondAttribute="height" multiplier="1:1" id="v2e-EH-jo0"/>
+                            <constraint firstItem="IVr-Rw-7R7" firstAttribute="trailing" secondItem="NiG-Mk-0fz" secondAttribute="trailing" id="wd5-mC-FZg"/>
+                            <constraint firstItem="3KW-0u-M5u" firstAttribute="top" secondItem="IVr-Rw-7R7" secondAttribute="top" id="wdb-J2-TZX"/>
+                            <constraint firstAttribute="trailing" secondItem="3KW-0u-M5u" secondAttribute="trailing" id="xuQ-mR-sDa"/>
+                            <constraint firstItem="NiG-Mk-0fz" firstAttribute="bottom" secondItem="lJ7-uI-B9d" secondAttribute="bottom" id="ycM-Ri-bEg"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="2C1-0C-z0Z"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="wqu-4q-g5P"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="279" y="326"/>
+            <point key="canvasLocation" x="278.5" y="325.5"/>
         </scene>
         <!--Beacon Maps-->
         <scene sceneID="vNF-f3-zn0">
@@ -127,24 +155,79 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8fl-cu-nP3" customClass="BeaconMapView" customModule="BeaconNavigator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="userDefined Position" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ym-5b-aNJ">
+                                <rect key="frame" x="196" y="512" width="179" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="179" id="Vua-Yn-Uzv"/>
+                                    <constraint firstAttribute="height" constant="21" id="hr4-TV-7Wr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="tracked Positions" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pU0-8g-A6g">
+                                <rect key="frame" x="0.0" y="539" width="375" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="Y63-Pj-f6f"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FuS-YM-qFV">
+                                <rect key="frame" x="0.0" y="64" width="375" height="440"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8fl-cu-nP3" customClass="BeaconMapView" customModule="BeaconNavigator" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="440"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <connections>
+                                    <outlet property="delegate" destination="Li1-Rg-oEf" id="3Y2-Zm-TEX"/>
+                                </connections>
+                            </scrollView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user Position" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWK-iE-JRy">
+                                <rect key="frame" x="0.0" y="512" width="188" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="ng7-rU-QvX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="8fl-cu-nP3" firstAttribute="top" secondItem="CwJ-1U-8Mg" secondAttribute="bottom" id="DFO-ai-OEf"/>
-                            <constraint firstAttribute="trailing" secondItem="8fl-cu-nP3" secondAttribute="trailing" id="LSx-nm-BNl"/>
-                            <constraint firstItem="8fl-cu-nP3" firstAttribute="leading" secondItem="u4a-5V-nYC" secondAttribute="leading" id="MCV-E9-qRN"/>
-                            <constraint firstItem="8fl-cu-nP3" firstAttribute="bottom" secondItem="1wJ-Ea-yzz" secondAttribute="top" id="VfE-yp-7jb"/>
+                            <constraint firstItem="FuS-YM-qFV" firstAttribute="trailing" secondItem="pU0-8g-A6g" secondAttribute="trailing" id="5XP-XY-ldF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pU0-8g-A6g" secondAttribute="trailing" constant="-16" id="EHq-tc-AQu"/>
+                            <constraint firstItem="FuS-YM-qFV" firstAttribute="top" secondItem="CwJ-1U-8Mg" secondAttribute="bottom" id="Hwa-ku-DsE"/>
+                            <constraint firstItem="pU0-8g-A6g" firstAttribute="top" secondItem="dWK-iE-JRy" secondAttribute="bottom" constant="6" id="Ie2-d1-kl0"/>
+                            <constraint firstAttribute="centerX" secondItem="dWK-iE-JRy" secondAttribute="centerX" constant="93.5" id="Neb-l2-MQc"/>
+                            <constraint firstItem="FuS-YM-qFV" firstAttribute="leading" secondItem="pU0-8g-A6g" secondAttribute="leading" id="Tos-AV-iki"/>
+                            <constraint firstItem="7ym-5b-aNJ" firstAttribute="trailing" secondItem="pU0-8g-A6g" secondAttribute="trailing" id="cQt-Yi-uzf"/>
+                            <constraint firstItem="7ym-5b-aNJ" firstAttribute="leading" secondItem="dWK-iE-JRy" secondAttribute="trailing" constant="8" symbolic="YES" id="efK-kl-N0L"/>
+                            <constraint firstItem="7ym-5b-aNJ" firstAttribute="baseline" secondItem="dWK-iE-JRy" secondAttribute="baseline" id="mRa-Fa-ZSe"/>
+                            <constraint firstItem="1wJ-Ea-yzz" firstAttribute="top" secondItem="pU0-8g-A6g" secondAttribute="bottom" id="s2P-EI-iMz"/>
+                            <constraint firstItem="dWK-iE-JRy" firstAttribute="top" secondItem="FuS-YM-qFV" secondAttribute="bottom" constant="8" symbolic="YES" id="tRB-TY-1DV"/>
+                            <constraint firstItem="pU0-8g-A6g" firstAttribute="leading" secondItem="u4a-5V-nYC" secondAttribute="leadingMargin" constant="-16" id="vrb-6F-aSd"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Beacon Map" id="gUq-TH-Tnr"/>
+                    <navigationItem key="navigationItem" title="Beacon Map" id="gUq-TH-Tnr">
+                        <barButtonItem key="rightBarButtonItem" title="track" id="rOo-LV-1z4">
+                            <connections>
+                                <action selector="rightBarButtonItemClicked" destination="Li1-Rg-oEf" id="3ty-qh-BB0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="beaconMapView" destination="8fl-cu-nP3" id="qYL-tm-8oF"/>
+                        <outlet property="logTextView" destination="pU0-8g-A6g" id="umV-mv-Mgd"/>
+                        <outlet property="mapScrollView" destination="FuS-YM-qFV" id="fJe-av-YdK"/>
+                        <outlet property="positionLabel" destination="dWK-iE-JRy" id="2LA-00-eBu"/>
+                        <outlet property="rightBarButtonItem" destination="rOo-LV-1z4" id="Aal-rE-wQf"/>
+                        <outlet property="userdefinedPositionLabel" destination="7ym-5b-aNJ" id="EVx-wO-cQk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ma-OU-o4M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -192,4 +275,7 @@
             <point key="canvasLocation" x="411.5" y="1182.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ibeacon-logo" width="240" height="290"/>
+    </resources>
 </document>

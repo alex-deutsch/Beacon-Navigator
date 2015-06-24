@@ -15,6 +15,7 @@ class BeaconMap {
     
     let name : String
     var edgeCoordinates : [CGPoint] = []
+    var maxPoint = CGPointZero
     
     // Beacon Minor Value(Int) : Point(CGPoint)
     private var beaconCoordinates : [Int : CGPoint] = [:]
@@ -29,6 +30,14 @@ class BeaconMap {
                 for edge in edges {
                     let edgePoint = CGPointMake(CGFloat(edge["x"]!.floatValue), CGFloat(edge["y"]!.floatValue))
                     edgeCoordinates.append(edgePoint)
+                    
+                    // Set Max Point
+                    if edgePoint.x > maxPoint.x {
+                        maxPoint.x = edgePoint.x
+                    }
+                    else if edgePoint.y > maxPoint.y {
+                        maxPoint.y = edgePoint.y
+                    }
                 }
                 
                 // Read Beacon Coordinates
