@@ -13,11 +13,16 @@ import UIKit
 let BeaconErrorDomain = "BeaconNavigator.f1re.de"
 let π = CGFloat(M_PI)
 
+enum LocationMethod : Int {
+    case Trilateration = 1
+    case LeastSquares = 2
+}
+
 class BeaconTrilaterationController {
     
     static let sharedInstance = BeaconTrilaterationController()
     
-    func trilaterateUsingBeacons(beacons : [CLBeacon], usingBeaconMap beaconMap : BeaconMap, completionBlock : ((error : NSError?, coordinates : CGPoint?, usedBeacons : [CLBeacon]) -> Void)) {
+    func locateUsingBeacons(beacons : [CLBeacon], usingBeaconMap beaconMap : BeaconMap, locationMethod : LocationMethod, completionBlock : ((error : NSError?, coordinates : Location?, usedBeacons : [CLBeacon]) -> Void)) {
         var error : NSError?
         
         // Only use beacons which are on the map
@@ -38,7 +43,7 @@ class BeaconTrilaterationController {
         // TODO: if there are more than 2 beacons, check if the first 3 beacons share the same minor or major id. if so take the 4th or 5th, ... beacon instead
         
         
-        // Trilateration
+        //Trilateration
         
         let beaconCoordinates = beaconMap.beaconCoordinatesForBeacons(usableBeacons)
         
@@ -49,14 +54,27 @@ class BeaconTrilaterationController {
         }
         else {
             if let position = trilaterate2D(beacon1, beacon2: beacon2, beacon3: beacon3, inMap: beaconMap) {
-                NSLog("calculated position \(position)")
-                completionBlock(error: nil, coordinates: position, usedBeacons : [beacon1,beacon2,beacon3])
+                NSLog("Trilateration Result \(position.x), \(position.y), 0")
+                if locationMethod == .Trilateration {
+                    completionBlock(error: nil, coordinates: Location(x: position.x, y: position.y, z: 0), usedBeacons : [beacon1,beacon2,beacon3])
+                }
             }
             else {
-                error = NSError(domain: BeaconErrorDomain, code: 2, userInfo: ["trilaterion Error":"unknown Trilateration Error"])
-                completionBlock(error: nil, coordinates: nil, usedBeacons : [beacon1,beacon2,beacon3])
+                if locationMethod == .Trilateration {
+                    error = NSError(domain: BeaconErrorDomain, code: 2, userInfo: ["trilaterion Error":"unknown Trilateration Error"])
+                    completionBlock(error: nil, coordinates: nil, usedBeacons : [beacon1,beacon2,beacon3])
+                }
+            }
+            
+            // Multilateration
+            
+            let location = multilaterate(usableBeacons, map: beaconMap)
+            NSLog("Multilaterion Result: \(location.x), \(location.y), \(location.z)")
+            if locationMethod == .LeastSquares {
+                completionBlock(error: nil, coordinates: location, usedBeacons: usableBeacons)
             }
         }
+        
         
     }
     
@@ -84,23 +102,25 @@ class BeaconTrilaterationController {
             // Case differention
             
             var translationAngle : CGFloat = 0
-            if beaconP2.y != 0 {
+            if beaconP2.y + translationVector.y != 0 {
                 
-                translationAngle = abs(atan(beaconP2.y / beaconP2.x))
+                translationAngle = abs(atan((beaconP2.y + translationVector.y) / (beaconP2.x + translationVector.x)))
                 // x > 0, y >0, nothing to do on additional calculation
                 
-                if beaconP2.x > 0 && beaconP2.y < 0 {
+                if beaconP2.x + translationVector.x > 0 && beaconP2.y + translationVector.y < 0 {
                     translationAngle = π - translationAngle
                 }
-                else if beaconP2.x < 0 && beaconP2.y < 0 {
+                else if beaconP2.x + translationVector.x < 0 && beaconP2.y + translationVector.y < 0 {
                     translationAngle += π
                 }
-                else if beaconP2.x < 0 && beaconP2.y > 0 {
+                else if beaconP2.x + translationVector.x < 0 && beaconP2.y + translationVector.y > 0 {
                     translationAngle = π - translationAngle
                 }
             }
             
             let angleInDegree = RadiansToDegrees(translationAngle)
+            
+            var beaconP1T = transformPointToNewCoordinateSystem2D(beaconP1, translationVector: translationVector, translationAngle: Double(translationAngle))
             
             var beaconP2T = transformPointToNewCoordinateSystem2D(beaconP2, translationVector: translationVector, translationAngle: Double(translationAngle))
             
@@ -109,32 +129,44 @@ class BeaconTrilaterationController {
             var distance1T = CGFloat(beacon1.accuracy)
             var distance2T = CGFloat(beacon2.accuracy)
             var distance3T = CGFloat(beacon3.accuracy)
-            
-            // Switch Points for calculation if beaconP2T.x == 0, because otherwise divition through zero
-            if beaconP2T.x == 0 {
-                var tempBeacon = beaconP3T
-                beaconP3T = beaconP2T
-                beaconP2T = tempBeacon
-                
-                var tempDistance = distance2T
-                distance2T = distance3T
-                distance3T = tempDistance
-            }
-            
-            let xPositionT1 = (pow(beaconP2T.x) + pow(distance1T) - pow(distance2T)) / (2 * beaconP2T.x)
-            let yPositionT1 = sqrt(pow(distance1T) - pow(xPositionT1))
-            let yPositionT2 = sqrt(pow(xPositionT1) - 2 * xPositionT1 * beaconP2T.x + pow(beaconP2T.x) - pow(distance2T))
-            // Tests only
-            let yPositionT3 = (pow(distance1T) - pow(distance2T) + pow(beaconP3T.x) + pow(beaconP3T.y)) / (2 * beaconP3T.y) - (beaconP3T.x / beaconP3T.y) * xPositionT1
-            
-            let positionT = CGPointMake(xPositionT1, (yPositionT2 > 0) ? yPositionT2 : yPositionT1)
-            var position = transformPointToOriginCoordinateSystem2D(positionT, translationVector: translationVector, translationAngle: Double(translationAngle))
-            
+
+            // Algorithm from http://stackoverflow.com/questions/16176656/trilateration-and-locating-the-point-x-y-z // This actually sucks
+            let xPositionT1 = (pow(distance1T) - pow(distance2T) + pow(beaconP2T.x)) / (2 * beaconP2T.x)
+            let yPositionT1 = (pow(distance1T) - pow(distance3T) + pow(beaconP3T.x) + pow(beaconP3T.y)) / (2 * beaconP3T.y - (beaconP3T.x / beaconP3T.y) * xPositionT1)
+            var position = transformPointToOriginCoordinateSystem2D(CGPointMake(xPositionT1, yPositionT1), translationVector: translationVector, translationAngle: Double(translationAngle))
             position = adjustPointToBeInsideMap(position, map: map)
             
-            return position
+            // alternative algorithm from https://en.wikipedia.org/wiki/Trilateration
+            let xPositionT2 = (pow(distance1T) - pow(distance2T) + pow(beaconP2T.x)) / (2 * beaconP2T.x)
+            let yPositionT2 = (pow(distance2T) - pow(distance3T) + pow(beaconP3T.x) + pow(beaconP3T.y)) / (2 * beaconP3T.y) - beaconP3T.x / beaconP3T.y * xPositionT2
+            let positionT2 = CGPointMake(xPositionT2, yPositionT2)
+            var position2 = transformPointToOriginCoordinateSystem2D(positionT2, translationVector: translationVector, translationAngle: Double(translationAngle))
+            position2 = adjustPointToBeInsideMap(position2, map: map)
+            
+            // mix algorithms
+            let positionT23Mix = CGPointMake((xPositionT1 + xPositionT2) / 2, (yPositionT1 + yPositionT2) / 2)
+            var position23Mix = transformPointToOriginCoordinateSystem2D(positionT23Mix, translationVector: translationVector, translationAngle: Double(translationAngle))
+            position23Mix = adjustPointToBeInsideMap(position23Mix, map: map)
+            
+            return position2
+            
         }
         return nil
+    }
+    
+    func multilaterate(beacons : [CLBeacon], map : BeaconMap) -> Location {
+        var transmissions : [NSDictionary] = []
+        for beacon in beacons {
+            if let beaconCoordinate = map.coordinateForBeacon(beacon) {
+                var transmission = ["x":beaconCoordinate.x,"y":beaconCoordinate.y,"accuracy":beacon.accuracy]
+                transmissions.append(transmission)
+            }
+
+        }
+        
+        let pointArray = NonLinear.determine(transmissions)
+        let location = Location(x: CGFloat(pointArray[0].floatValue), y: CGFloat(pointArray[1].floatValue), z: CGFloat(pointArray[2].floatValue))
+        return location
     }
     
     /*
@@ -178,7 +210,7 @@ class BeaconTrilaterationController {
         let pointX = point.x + vector.x
         let pointY = point.y + vector.y
         let x = pointX * CGFloat(cos(angle)) + pointY * CGFloat(sin(angle))
-        let y = (-pointX) * CGFloat(sin(angle)) + pointY * CGFloat(cos(angle))
+        let y = pointY * CGFloat(cos(angle)) - pointX * CGFloat(sin(angle))
         return CGPointMake(x, y)
     }
     

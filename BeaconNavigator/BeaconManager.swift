@@ -7,6 +7,7 @@
 //
 
 import CoreLocation
+import Accelerate
 
 let BeaconManagerDidUpdateAvailableBeacons = "beaconManagerDidUpdateAvailableBeacons"
 
@@ -46,6 +47,6 @@ class BeaconManager : NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(manager: CLLocationManager!, rangingBeaconsDidFailForRegion region: CLBeaconRegion!, withError error: NSError!) {
-        
     }
+    
 }

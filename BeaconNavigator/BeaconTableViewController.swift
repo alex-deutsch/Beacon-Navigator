@@ -23,6 +23,7 @@ class BeaconTableViewController: UITableViewController, CLLocationManagerDelegat
         
         let beacon = beacons![indexPath.row]
         
+        cell.imageView?.image = UIImage(named: "beacon_blue")
         cell.textLabel?.text = "Major: \(beacon.major) Minor: \(beacon.minor)"
         cell.detailTextLabel?.text = "Accuracy: \(beacon.accuracy), RSSI: \(beacon.rssi)"
         

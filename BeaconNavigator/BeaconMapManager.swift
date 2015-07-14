@@ -10,7 +10,7 @@ import Foundation
 
 class BeaconMapManager : NSObject {
     
-    let mapNames = ["SimpleQuad","Wohnung","Ärztehaus"]
+    let mapNames = ["SimpleQuad","Wohnung","Medicare 3 Beacons","Medicare 4 Beacons","Medicare 5 Beacons"]
     
     static let sharedInstance = BeaconMapManager()
     

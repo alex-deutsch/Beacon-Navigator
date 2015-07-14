@@ -85,21 +85,22 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate {
                 beaconMapView.beaconPoints = beaconMinorPosition
                 
                 // Calculate Position
-                BeaconTrilaterationController.sharedInstance.trilaterateUsingBeacons(beacons,usingBeaconMap: beaconMap, completionBlock: { (error, coordinates, usedBeacons) -> Void in
+                BeaconTrilaterationController.sharedInstance.locateUsingBeacons(beacons,usingBeaconMap: beaconMap, locationMethod : LocationMethod.LeastSquares, completionBlock: { (error, coordinates, usedBeacons) -> Void in
                     if let error = error {
                         NSLog("Error Trilaterating: \(error.localizedDescription)")
                     }
                     else if let coordinates = coordinates {
-                        NSLog("received current position: \(coordinates)")
-                        self.beaconMapView.currentPosition = coordinates
+                        let positionPoint = CGPointMake(coordinates.x, coordinates.y)
+                        //NSLog("received current position: \(positionPoint)")
+                        self.beaconMapView.currentPosition = positionPoint
                         self.beaconMapView.usedBeacons = usedBeacons.map { $0.minor.integerValue }
                         
                         // update label
-                        self.positionLabel.text = String.localizedStringWithFormat("userDefP: \(coordinates.formatedString())")
+                        self.positionLabel.text = String.localizedStringWithFormat("calc Pos: \(positionPoint.formatedString())")
                         
                         // Track Point if on
                         if self.trackPositions {
-                            self.trackedPositions.append(coordinates)
+                            self.trackedPositions.append(positionPoint)
                         }
                     }
                 })
@@ -121,7 +122,7 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate {
     // Notifications
     func mapViewDidUpdateUserDefinedPosition(notification : NSNotification) {
         if let position = beaconMapView.userdefinedPosition {
-            userdefinedPositionLabel.text = String.localizedStringWithFormat("userDefP: \(position.formatedString())")
+            userdefinedPositionLabel.text = String.localizedStringWithFormat("userDef P: \(position.formatedString())")
         }
         
         // Reset tracked Points
@@ -131,5 +132,13 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate {
     @IBAction func rightBarButtonItemClicked() {
         trackPositions = !trackPositions
         rightBarButtonItem.title = trackPositions ? "untrack" : "track"
+    }
+    
+    @IBAction func generatePDFClicked() {
+        if let beaconName = beaconMap?.name {
+            let pdfManager = BeaconMapPDFCreator(name: beaconName)
+            pdfManager.generatePDF(beaconMapView, loggedPositionsString: logTextView.text, currentPositionsString: positionLabel.text!, userPositionsString: userdefinedPositionLabel.text!)
+            pdfManager.openPDF(self)
+        }
     }
 }

@@ -143,7 +143,7 @@
             </objects>
             <point key="canvasLocation" x="873.5" y="304.5"/>
         </scene>
-        <!--Beacon Map-->
+        <!--Beacon Map View Controller-->
         <scene sceneID="J9G-Uv-dWS">
             <objects>
                 <viewController id="Li1-Rg-oEf" customClass="BeaconMapViewController" customModule="BeaconNavigator" customModuleProvider="target" sceneMemberID="viewController">
@@ -155,11 +155,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="userDefined Position" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ym-5b-aNJ">
-                                <rect key="frame" x="196" y="512" width="179" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="def   Position" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ym-5b-aNJ">
+                                <rect key="frame" x="188" y="512" width="188" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="179" id="Vua-Yn-Uzv"/>
+                                    <constraint firstAttribute="width" constant="188" id="Vua-Yn-Uzv"/>
                                     <constraint firstAttribute="height" constant="21" id="hr4-TV-7Wr"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="188" id="htz-TQ-UOc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -186,9 +187,10 @@
                                     <outlet property="delegate" destination="Li1-Rg-oEf" id="3Y2-Zm-TEX"/>
                                 </connections>
                             </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user Position" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWK-iE-JRy">
-                                <rect key="frame" x="0.0" y="512" width="188" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="calc Position" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWK-iE-JRy">
+                                <rect key="frame" x="188" y="481" width="188" height="21"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="188" id="Q7G-ru-7Ih"/>
                                     <constraint firstAttribute="height" constant="21" id="ng7-rU-QvX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -199,20 +201,31 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="FuS-YM-qFV" firstAttribute="trailing" secondItem="pU0-8g-A6g" secondAttribute="trailing" id="5XP-XY-ldF"/>
+                            <constraint firstAttribute="trailing" secondItem="dWK-iE-JRy" secondAttribute="trailing" constant="-1" id="DGM-XB-DgJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="pU0-8g-A6g" secondAttribute="trailing" constant="-16" id="EHq-tc-AQu"/>
                             <constraint firstItem="FuS-YM-qFV" firstAttribute="top" secondItem="CwJ-1U-8Mg" secondAttribute="bottom" id="Hwa-ku-DsE"/>
-                            <constraint firstItem="pU0-8g-A6g" firstAttribute="top" secondItem="dWK-iE-JRy" secondAttribute="bottom" constant="6" id="Ie2-d1-kl0"/>
-                            <constraint firstAttribute="centerX" secondItem="dWK-iE-JRy" secondAttribute="centerX" constant="93.5" id="Neb-l2-MQc"/>
+                            <constraint firstItem="pU0-8g-A6g" firstAttribute="top" secondItem="dWK-iE-JRy" secondAttribute="bottom" constant="37" id="Ie2-d1-kl0"/>
                             <constraint firstItem="FuS-YM-qFV" firstAttribute="leading" secondItem="pU0-8g-A6g" secondAttribute="leading" id="Tos-AV-iki"/>
-                            <constraint firstItem="7ym-5b-aNJ" firstAttribute="trailing" secondItem="pU0-8g-A6g" secondAttribute="trailing" id="cQt-Yi-uzf"/>
-                            <constraint firstItem="7ym-5b-aNJ" firstAttribute="leading" secondItem="dWK-iE-JRy" secondAttribute="trailing" constant="8" symbolic="YES" id="efK-kl-N0L"/>
-                            <constraint firstItem="7ym-5b-aNJ" firstAttribute="baseline" secondItem="dWK-iE-JRy" secondAttribute="baseline" id="mRa-Fa-ZSe"/>
+                            <constraint firstItem="pU0-8g-A6g" firstAttribute="top" secondItem="7ym-5b-aNJ" secondAttribute="bottom" constant="6" id="b9E-G5-8xw"/>
+                            <constraint firstAttribute="trailing" secondItem="7ym-5b-aNJ" secondAttribute="trailing" constant="-1" id="iyU-6x-yrG"/>
+                            <constraint firstItem="7ym-5b-aNJ" firstAttribute="top" secondItem="FuS-YM-qFV" secondAttribute="bottom" constant="8" id="nj0-4e-g4W"/>
                             <constraint firstItem="1wJ-Ea-yzz" firstAttribute="top" secondItem="pU0-8g-A6g" secondAttribute="bottom" id="s2P-EI-iMz"/>
-                            <constraint firstItem="dWK-iE-JRy" firstAttribute="top" secondItem="FuS-YM-qFV" secondAttribute="bottom" constant="8" symbolic="YES" id="tRB-TY-1DV"/>
                             <constraint firstItem="pU0-8g-A6g" firstAttribute="leading" secondItem="u4a-5V-nYC" secondAttribute="leadingMargin" constant="-16" id="vrb-6F-aSd"/>
+                            <constraint firstItem="dWK-iE-JRy" firstAttribute="top" secondItem="CwJ-1U-8Mg" secondAttribute="bottom" constant="417" id="x6B-6r-wJ9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Beacon Map" id="gUq-TH-Tnr">
+                    <navigationItem key="navigationItem" id="gUq-TH-Tnr">
+                        <nil key="title"/>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nGF-ux-lPF">
+                            <rect key="frame" x="139" y="7" width="97" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Generate PDF">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="generatePDFClicked" destination="Li1-Rg-oEf" eventType="touchUpInside" id="XvR-gB-DlR"/>
+                            </connections>
+                        </button>
                         <barButtonItem key="rightBarButtonItem" title="track" id="rOo-LV-1z4">
                             <connections>
                                 <action selector="rightBarButtonItemClicked" destination="Li1-Rg-oEf" id="3ty-qh-BB0"/>

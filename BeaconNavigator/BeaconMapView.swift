@@ -115,7 +115,7 @@ class BeaconMapView : UIView {
             }
             
             wallPath.addLineToPoint(CGPointMake(edgePoints![0].x * scaleXY, edgePoints![0].y * scaleXY))
-            wallPath.lineWidth = 10
+            wallPath.lineWidth = 5
             roomBorderColor.setStroke()
             wallPath.stroke()
             wallPath.closePath()
@@ -131,6 +131,7 @@ class BeaconMapView : UIView {
                 }
                 
                 if let distance = beaconDistances[minor] {
+                    NSLog("drawing distance for minor: \(minor) distance: \(distance)")
                     let distanceRect = CGRectMake((beaconPoint.x - distance) * scaleXY, (beaconPoint.y - distance) * scaleXY, distance * 2 * scaleXY, distance * 2 * scaleXY)
                     let distancePath = UIBezierPath(ovalInRect: distanceRect)
                     distancePath.lineWidth = 3
@@ -164,7 +165,7 @@ class BeaconMapView : UIView {
     
     func drawPointAtPosition(position : CGPoint, color: UIColor) {
         color.setFill()
-        let pointPath = UIBezierPath(ovalInRect: CGRectMake(position.x * scaleXY - 10, position.y * scaleXY - 10, 20, 20))
+        let pointPath = UIBezierPath(ovalInRect: CGRectMake(position.x * scaleXY - 5, position.y * scaleXY - 5, 10, 10))
         pointPath.fill()
         pointPath.closePath()
     }

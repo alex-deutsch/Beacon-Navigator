@@ -12,45 +12,45 @@
 		</dict>
 		<dict>
 			<key>x</key>
-			<integer>0</integer>
+			<real>19.3</real>
 			<key>y</key>
-			<integer>4</integer>
+			<integer>0</integer>
 		</dict>
 		<dict>
 			<key>x</key>
-			<integer>3</integer>
+			<real>19.3</real>
 			<key>y</key>
-			<integer>4</integer>
+			<real>21.3</real>
 		</dict>
 		<dict>
 			<key>x</key>
-			<integer>3</integer>
-			<key>y</key>
 			<integer>0</integer>
+			<key>y</key>
+			<real>21.3</real>
 		</dict>
 	</array>
 	<key>beacons</key>
 	<dict>
-		<key>21604</key>
-		<dict>
-			<key>x</key>
-			<real>1.5</real>
-			<key>y</key>
-			<integer>0</integer>
-		</dict>
-		<key>39236</key>
-		<dict>
-			<key>x</key>
-			<integer>3</integer>
-			<key>y</key>
-			<integer>3</integer>
-		</dict>
-		<key>45301</key>
+		<key>29572</key>
 		<dict>
 			<key>x</key>
 			<integer>0</integer>
 			<key>y</key>
-			<integer>3</integer>
+			<integer>0</integer>
+		</dict>
+		<key>25971</key>
+		<dict>
+			<key>x</key>
+			<integer>0</integer>
+			<key>y</key>
+			<real>21.3</real>
+		</dict>
+		<key>14613</key>
+		<dict>
+			<key>x</key>
+			<real>19.3</real>
+			<key>y</key>
+			<real>10.6</real>
 		</dict>
 	</dict>
 </dict>

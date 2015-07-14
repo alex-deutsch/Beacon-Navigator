@@ -8,79 +8,181 @@
 			<key>x</key>
 			<integer>0</integer>
 			<key>y</key>
-			<integer>0</integer>
+			<real>7.97</real>
 		</dict>
 		<dict>
 			<key>x</key>
-			<real>1.3</real>
+			<integer>0</integer>
+			<key>y</key>
+			<real>13.03</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>4.66</real>
+			<key>y</key>
+			<real>13.03</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>4.66</real>
+			<key>y</key>
+			<real>10.8</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>8.42</real>
+			<key>y</key>
+			<real>10.8</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>8.42</real>
+			<key>y</key>
+			<real>8.98</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>4.66</real>
+			<key>y</key>
+			<real>8.98</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>4.66</real>
+			<key>y</key>
+			<real>7.09</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>4.77</real>
+			<key>y</key>
+			<real>7.09</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>4.77</real>
+			<key>y</key>
+			<real>8.84</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>8.42</real>
+			<key>y</key>
+			<real>8.84</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>8.42</real>
+			<key>y</key>
+			<real>5.15</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>4.77</real>
+			<key>y</key>
+			<real>5.15</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>4.77</real>
+			<key>y</key>
+			<real>6.01</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>4.67</real>
+			<key>y</key>
+			<real>6.01</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>4.67</real>
+			<key>y</key>
+			<real>5.01</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>8.42</real>
+			<key>y</key>
+			<real>5.01</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>8.42</real>
+			<key>y</key>
+			<real>3.56</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>4.67</real>
+			<key>y</key>
+			<real>3.56</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>4.67</real>
+			<key>y</key>
+			<real>2.6</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>4.77</real>
+			<key>y</key>
+			<real>2.6</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>4.77</real>
+			<key>y</key>
+			<real>3.6</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>8.42</real>
+			<key>y</key>
+			<real>3.6</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>8.42</real>
 			<key>y</key>
 			<integer>0</integer>
 		</dict>
 		<dict>
 			<key>x</key>
-			<real>1.3</real>
+			<real>4.77</real>
+			<key>y</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>4.77</real>
+			<key>y</key>
+			<real>2.57</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>4.67</real>
+			<key>y</key>
+			<real>2.57</real>
+		</dict>
+		<dict>
+			<key>x</key>
+			<real>4.67</real>
 			<key>y</key>
 			<real>1.5</real>
 		</dict>
 		<dict>
 			<key>x</key>
-			<real>1.54</real>
+			<real>3.37</real>
 			<key>y</key>
 			<real>1.5</real>
 		</dict>
 		<dict>
 			<key>x</key>
-			<real>1.54</real>
+			<real>3.37</real>
 			<key>y</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>x</key>
-			<real>5.1</real>
-			<key>y</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>x</key>
-			<real>5.1</real>
-			<key>y</key>
-			<real>3.3</real>
-		</dict>
-		<dict>
-			<key>x</key>
-			<real>1.54</real>
-			<key>y</key>
-			<real>3.3</real>
-		</dict>
-		<dict>
-			<key>x</key>
-			<real>1.54</real>
-			<key>y</key>
-			<real>2.45</real>
-		</dict>
-		<dict>
-			<key>x</key>
-			<real>1.3</real>
-			<key>y</key>
-			<real>2.45</real>
-		</dict>
-		<dict>
-			<key>x</key>
-			<real>1.3</real>
-			<key>y</key>
-			<real>7.05</real>
-		</dict>
-		<dict>
-			<key>x</key>
-			<integer>0</integer>
-			<key>y</key>
-			<real>7.05</real>
-		</dict>
-		<dict>
-			<key>x</key>
-			<integer>0</integer>
-			<key>y</key>
-			<integer>0</integer>
+			<real>7.97</real>
 		</dict>
 	</array>
 	<key>beacons</key>
@@ -88,37 +190,37 @@
 		<key>21604</key>
 		<dict>
 			<key>x</key>
-			<real>3.84</real>
-			<key>y</key>
 			<integer>0</integer>
+			<key>y</key>
+			<real>7.97</real>
 		</dict>
 		<key>39236</key>
 		<dict>
 			<key>x</key>
-			<real>5.1</real>
+			<real>8.42</real>
 			<key>y</key>
-			<real>3.3</real>
+			<integer>0</integer>
 		</dict>
 		<key>45301</key>
 		<dict>
 			<key>x</key>
-			<real>1.54</real>
+			<real>3.37</real>
 			<key>y</key>
-			<real>3.3</real>
+			<real>1.5</real>
 		</dict>
 		<key>31135</key>
 		<dict>
 			<key>x</key>
-			<integer>0</integer>
+			<real>3.37</real>
 			<key>y</key>
-			<real>7.05</real>
+			<real>7.09</real>
 		</dict>
 		<key>35378</key>
 		<dict>
 			<key>x</key>
-			<integer>0</integer>
+			<real>0.3</real>
 			<key>y</key>
-			<integer>0</integer>
+			<integer>13</integer>
 		</dict>
 	</dict>
 </dict>
