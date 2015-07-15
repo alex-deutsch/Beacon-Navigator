@@ -4,3 +4,4 @@
 
 #include "EquationSolv.m"
 #import "NonLinear.h"
+#import "Trilateration.h"

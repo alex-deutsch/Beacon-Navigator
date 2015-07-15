@@ -7,34 +7,30 @@
 //
 
 #import "Trilateration.h"
-
-#import "BeaconManager.h"
-#import "Transmission.h"
+#import <UIKit/UIKit.h>
 
 #define radians(angle) ((angle) / 180.0 * M_PI)
 #define degrees(radians) ((radians) * (180.0 / M_PI))
 
 @implementation Trilateration
 
-+ (void)trilaterate:(NSArray *)transmissions
-            success:(void (^)(Location *location))success
-            failure:(void (^)(NSError *error))failure;
++ (NSArray *)trilaterate:(NSArray *)transmissions
 {
     if ([transmissions count] == 3) {
         // use always only three beacons / transmits
-        Transmission *transmission1 = transmissions[0];
-        Transmission *transmission2 = transmissions[1];
-        Transmission *transmission3 = transmissions[2];
+        NSDictionary *transmission1 = transmissions[0];
+        NSDictionary *transmission2 = transmissions[1];
+        NSDictionary *transmission3 = transmissions[2];
         
-        CGFloat latA = transmission1.beacon.location.x,
-                lonA = transmission1.beacon.location.y,
-                distA = transmission1.accuracy,
-                latB = transmission2.beacon.location.x,
-                lonB = transmission2.beacon.location.y,
-                distB = transmission2.accuracy,
-                latC = transmission3.beacon.location.x,
-                lonC = transmission3.beacon.location.y,
-                distC = transmission3.accuracy;
+        CGFloat latA = [transmission1[@"x"] floatValue],
+                lonA = [transmission1[@"y"] floatValue],
+                distA = [transmission1[@"accuracy"] floatValue],
+                latB = [transmission2[@"x"] floatValue],
+                lonB = [transmission2[@"y"] floatValue],
+                distB = [transmission2[@"accuracy"] floatValue],
+                latC = [transmission3[@"x"] floatValue],
+                lonC = [transmission3[@"y"] floatValue],
+                distC = [transmission3[@"accuracy"] floatValue];
 
         CGFloat P1[] = { lonA, latA, 0 };
         CGFloat P2[] = { lonB, latB, 0 };
@@ -115,14 +111,13 @@
         // convert to degrees
         CGFloat lon = triPt[0];
         CGFloat lat = triPt[1];
-
-        success([[Location alloc] initWithX:lon y:lat z:z]);
+        
+        NSArray *location = @[[NSNumber numberWithFloat:lat],[NSNumber numberWithFloat:lon],[NSNumber numberWithFloat:z]];
+        
+        
+        return location;
     }
-    else {
-        failure([NSError errorWithDomain:@"At least 3 useful beacons are required"
-                                    code:101
-                                userInfo:nil]);
-    }
+    return @[[NSNumber numberWithInt:0],[NSNumber numberWithInt:0],[NSNumber numberWithInt:0]];
 }
 
 @end

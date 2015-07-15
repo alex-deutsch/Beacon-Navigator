@@ -11,8 +11,6 @@
 
 @interface Trilateration : NSObject
 
-+ (void)trilaterate:(NSArray *)transmissions
-            success:(void (^)(Location *location))success
-            failure:(void (^)(NSError *error))failure;
++ (NSArray *)trilaterate:(NSArray *)transmissions;
 
 @end

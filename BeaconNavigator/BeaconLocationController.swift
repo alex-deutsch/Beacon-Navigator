@@ -14,13 +14,14 @@ let BeaconErrorDomain = "BeaconNavigator.f1re.de"
 let π = CGFloat(M_PI)
 
 enum LocationMethod : Int {
-    case Trilateration = 1
+    case Trilateration = 0
+    case TrilaterationAlternative = 1
     case LeastSquares = 2
 }
 
-class BeaconTrilaterationController {
+class BeaconLocationController {
     
-    static let sharedInstance = BeaconTrilaterationController()
+    static let sharedInstance = BeaconLocationController()
     
     func locateUsingBeacons(beacons : [CLBeacon], usingBeaconMap beaconMap : BeaconMap, locationMethod : LocationMethod, completionBlock : ((error : NSError?, coordinates : Location?, usedBeacons : [CLBeacon]) -> Void)) {
         var error : NSError?
@@ -43,7 +44,7 @@ class BeaconTrilaterationController {
         // TODO: if there are more than 2 beacons, check if the first 3 beacons share the same minor or major id. if so take the 4th or 5th, ... beacon instead
         
         
-        //Trilateration
+
         
         let beaconCoordinates = beaconMap.beaconCoordinatesForBeacons(usableBeacons)
         
@@ -53,6 +54,8 @@ class BeaconTrilaterationController {
             return
         }
         else {
+            
+            //Trilateration #1
             if let position = trilaterate2D(beacon1, beacon2: beacon2, beacon3: beacon3, inMap: beaconMap) {
                 NSLog("Trilateration Result \(position.x), \(position.y), 0")
                 if locationMethod == .Trilateration {
@@ -63,6 +66,15 @@ class BeaconTrilaterationController {
                 if locationMethod == .Trilateration {
                     error = NSError(domain: BeaconErrorDomain, code: 2, userInfo: ["trilaterion Error":"unknown Trilateration Error"])
                     completionBlock(error: nil, coordinates: nil, usedBeacons : [beacon1,beacon2,beacon3])
+                }
+            }
+            
+            // Trilateration #2
+            
+            if let trilateration2Location = trilaterate3D([beacon1,beacon2,beacon3], map: beaconMap) {
+                NSLog("Trilateration #2  Result: \(trilateration2Location.x), \(trilateration2Location.y), \(trilateration2Location.z)")
+                if locationMethod == .TrilaterationAlternative {
+                completionBlock(error: nil, coordinates: trilateration2Location, usedBeacons: [beacon1,beacon2,beacon3])
                 }
             }
             
@@ -165,8 +177,29 @@ class BeaconTrilaterationController {
         }
         
         let pointArray = NonLinear.determine(transmissions)
-        let location = Location(x: CGFloat(pointArray[0].floatValue), y: CGFloat(pointArray[1].floatValue), z: CGFloat(pointArray[2].floatValue))
+        var location = Location(x: CGFloat(pointArray[0].floatValue), y: CGFloat(pointArray[1].floatValue), z: CGFloat(pointArray[2].floatValue))
+        // adjust location to be inside map
+        location = adjustLocationToBeInsideMap(location, map: map)
         return location
+    }
+    
+    func trilaterate3D(beacons : [CLBeacon], map : BeaconMap) -> Location? {
+        var transmissions : [NSDictionary] = []
+        for beacon in beacons {
+            if let beaconCoordinate = map.coordinateForBeacon(beacon) {
+                var transmission = ["x":beaconCoordinate.x,"y":beaconCoordinate.y,"accuracy":beacon.accuracy]
+                transmissions.append(transmission)
+            }
+            
+        }
+        
+        if let pointArray = Trilateration.trilaterate(transmissions) as? [NSNumber] {
+            var location = Location(x: CGFloat(pointArray[0].floatValue), y: CGFloat(pointArray[1].floatValue), z: CGFloat(pointArray[2].floatValue))
+            // adjust location to be inside map
+            location = adjustLocationToBeInsideMap(location, map: map)
+            return location
+        }
+        return nil
     }
     
     /*
@@ -178,6 +211,16 @@ class BeaconTrilaterationController {
     func adjustPointToBeInsideMap(point : CGPoint, map : BeaconMap) -> CGPoint {
         // Adjust Position so it will always be inside the Map
         var adjustedPoint = point
+        adjustedPoint.x = max(0, adjustedPoint.x)
+        adjustedPoint.x = min(adjustedPoint.x, map.maxPoint.x)
+        adjustedPoint.y = max(0, adjustedPoint.y)
+        adjustedPoint.y = min(adjustedPoint.y, map.maxPoint.y)
+        return adjustedPoint
+    }
+    
+    func adjustLocationToBeInsideMap(location : Location, map : BeaconMap) -> Location {
+        // Adjust Position so it will always be inside the Map
+        var adjustedPoint = location
         adjustedPoint.x = max(0, adjustedPoint.x)
         adjustedPoint.x = min(adjustedPoint.x, map.maxPoint.x)
         adjustedPoint.y = max(0, adjustedPoint.y)

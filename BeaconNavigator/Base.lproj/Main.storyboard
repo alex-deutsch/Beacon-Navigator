@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14E7f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6Li-1U-M9K">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6Li-1U-M9K">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -26,78 +25,34 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="BeaconNavigator" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="70" sectionHeaderHeight="10" sectionFooterHeight="10" id="KjM-PS-dtF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJ7-uI-B9d">
-                                <rect key="frame" x="108" y="292" width="267" height="83"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Beacon List">
-                                    <color key="titleColor" red="0.31372549019607843" green="0.66666666666666663" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="k4c-Fo-qXX" kind="show" id="arK-dW-iIt"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3KW-0u-M5u">
-                                <rect key="frame" x="108" y="163" width="267" height="83"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="83" id="Kgs-Cc-c7x"/>
-                                    <constraint firstAttribute="width" constant="267" id="ilQ-UD-ZwU"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Navigation Maps">
-                                    <color key="titleColor" red="0.31372549019607843" green="0.66666666666666663" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="jPD-I4-FQY" kind="show" id="hUW-VQ-b8D"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ibeacon-logo" translatesAutoresizingMaskIntoConstraints="NO" id="NiG-Mk-0fz">
-                                <rect key="frame" x="25" y="292" width="83" height="83"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ibeacon-logo" translatesAutoresizingMaskIntoConstraints="NO" id="IVr-Rw-7R7">
-                                <rect key="frame" x="25" y="163" width="83" height="83"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="3KW-0u-M5u" firstAttribute="leading" secondItem="lJ7-uI-B9d" secondAttribute="leading" id="0PC-uL-9tD"/>
-                            <constraint firstAttribute="centerX" secondItem="lJ7-uI-B9d" secondAttribute="centerX" id="2C1-0C-z0Z"/>
-                            <constraint firstItem="3KW-0u-M5u" firstAttribute="trailing" secondItem="lJ7-uI-B9d" secondAttribute="trailing" id="F03-oe-qqs"/>
-                            <constraint firstItem="3KW-0u-M5u" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="99" id="HvS-UE-ZVs"/>
-                            <constraint firstItem="IVr-Rw-7R7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="9" id="Ife-tO-GxA"/>
-                            <constraint firstItem="NiG-Mk-0fz" firstAttribute="top" secondItem="IVr-Rw-7R7" secondAttribute="bottom" constant="46" id="N37-YT-llz"/>
-                            <constraint firstItem="3KW-0u-M5u" firstAttribute="bottom" secondItem="IVr-Rw-7R7" secondAttribute="bottom" id="XTK-U9-3rB"/>
-                            <constraint firstItem="3KW-0u-M5u" firstAttribute="leading" secondItem="IVr-Rw-7R7" secondAttribute="trailing" id="Xg3-oq-GNH"/>
-                            <constraint firstItem="IVr-Rw-7R7" firstAttribute="leading" secondItem="NiG-Mk-0fz" secondAttribute="leading" id="jFg-Gl-kgN"/>
-                            <constraint firstItem="lJ7-uI-B9d" firstAttribute="top" secondItem="3KW-0u-M5u" secondAttribute="bottom" constant="46" id="sIo-Hf-41l"/>
-                            <constraint firstItem="NiG-Mk-0fz" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="uPu-ko-QYR"/>
-                            <constraint firstItem="NiG-Mk-0fz" firstAttribute="width" secondItem="IVr-Rw-7R7" secondAttribute="height" multiplier="1:1" id="v2e-EH-jo0"/>
-                            <constraint firstItem="IVr-Rw-7R7" firstAttribute="trailing" secondItem="NiG-Mk-0fz" secondAttribute="trailing" id="wd5-mC-FZg"/>
-                            <constraint firstItem="3KW-0u-M5u" firstAttribute="top" secondItem="IVr-Rw-7R7" secondAttribute="top" id="wdb-J2-TZX"/>
-                            <constraint firstAttribute="trailing" secondItem="3KW-0u-M5u" secondAttribute="trailing" id="xuQ-mR-sDa"/>
-                            <constraint firstItem="NiG-Mk-0fz" firstAttribute="bottom" secondItem="lJ7-uI-B9d" secondAttribute="bottom" id="ycM-Ri-bEg"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="2C1-0C-z0Z"/>
-                            </mask>
-                        </variation>
-                    </view>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="jAh-xO-PzK">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jAh-xO-PzK" id="PEh-iZ-oS6">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="BYZ-38-t0r" id="UeI-gS-dc2"/>
+                            <outlet property="delegate" destination="BYZ-38-t0r" id="joL-g5-Noj"/>
+                        </connections>
+                    </tableView>
                     <navigationItem key="navigationItem" id="wqu-4q-g5P"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <segue destination="jPD-I4-FQY" kind="show" identifier="main2maps" id="FWo-P3-Ljs"/>
+                        <segue destination="k4c-Fo-qXX" kind="show" identifier="main2beaconlist" id="Ldy-yS-DyP"/>
+                        <segue destination="gok-wh-2ja" kind="show" identifier="main2settings" id="Hes-x5-T3T"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="278.5" y="325.5"/>
+            <point key="canvasLocation" x="411.5" y="420.5"/>
         </scene>
         <!--Beacon Maps-->
         <scene sceneID="vNF-f3-zn0">
@@ -116,13 +71,13 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3dF-Xp-aMH">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8Zk-mo-ARq">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -163,7 +118,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="188" id="htz-TQ-UOc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="tracked Positions" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pU0-8g-A6g">
@@ -194,7 +149,7 @@
                                     <constraint firstAttribute="height" constant="21" id="ng7-rU-QvX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -264,13 +219,13 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="khF-tx-5xb">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xAL-hN-a3O">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -287,8 +242,32 @@
             </objects>
             <point key="canvasLocation" x="411.5" y="1182.5"/>
         </scene>
+        <!--Settings Table View Controller-->
+        <scene sceneID="3mO-BL-nJc">
+            <objects>
+                <tableViewController id="gok-wh-2ja" customClass="SettingsTableViewController" customModule="BeaconNavigator" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Zqv-J3-bWN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="9nm-XI-N1t">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9nm-XI-N1t" id="ecJ-7P-xQC">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="gok-wh-2ja" id="qIS-Uq-woR"/>
+                            <outlet property="delegate" destination="gok-wh-2ja" id="rv3-D7-dLh"/>
+                        </connections>
+                    </tableView>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OEm-aX-Z8r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="950.5" y="1182.5"/>
+        </scene>
     </scenes>
-    <resources>
-        <image name="ibeacon-logo" width="240" height="290"/>
-    </resources>
 </document>

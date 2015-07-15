@@ -85,7 +85,8 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate {
                 beaconMapView.beaconPoints = beaconMinorPosition
                 
                 // Calculate Position
-                BeaconTrilaterationController.sharedInstance.locateUsingBeacons(beacons,usingBeaconMap: beaconMap, locationMethod : LocationMethod.LeastSquares, completionBlock: { (error, coordinates, usedBeacons) -> Void in
+                let locationMethod : LocationMethod = LocationMethod(rawValue: NSUserDefaults.standardUserDefaults().integerForKey("LocationMethod"))!
+                BeaconLocationController.sharedInstance.locateUsingBeacons(beacons,usingBeaconMap: beaconMap, locationMethod : locationMethod, completionBlock: { (error, coordinates, usedBeacons) -> Void in
                     if let error = error {
                         NSLog("Error Trilaterating: \(error.localizedDescription)")
                     }
