@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C6BF43C31B56D12200DB53B6 /* SeefeldWohnzimmerSquare.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6BF43C21B56D12200DB53B6 /* SeefeldWohnzimmerSquare.plist */; };
 		FA034C2E1B3C2BAD00355DFD /* BeaconMapPDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA034C2D1B3C2BAD00355DFD /* BeaconMapPDFCreator.swift */; };
 		FA034C301B3C582000355DFD /* Medicare 3 Beacons.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA034C2F1B3C582000355DFD /* Medicare 3 Beacons.plist */; };
 		FA1BF43E1B34727200C727ED /* Wohnung.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA1BF43D1B34727200C727ED /* Wohnung.plist */; };
@@ -160,6 +161,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C6BF43C21B56D12200DB53B6 /* SeefeldWohnzimmerSquare.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SeefeldWohnzimmerSquare.plist; sourceTree = "<group>"; };
 		FA034C2D1B3C2BAD00355DFD /* BeaconMapPDFCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconMapPDFCreator.swift; sourceTree = "<group>"; };
 		FA034C2F1B3C582000355DFD /* Medicare 3 Beacons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Medicare 3 Beacons.plist"; sourceTree = "<group>"; };
 		FA1BF43D1B34727200C727ED /* Wohnung.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Wohnung.plist; sourceTree = "<group>"; };
@@ -673,6 +675,7 @@
 				FA034C2F1B3C582000355DFD /* Medicare 3 Beacons.plist */,
 				FA1BF43F1B34D3B100C727ED /* Medicare 4 Beacons.plist */,
 				FA9F4F481B3D799D008680C2 /* Medicare 5 Beacons.plist */,
+				C6BF43C21B56D12200DB53B6 /* SeefeldWohnzimmerSquare.plist */,
 			);
 			name = "Beacon Maps";
 			sourceTree = "<group>";
@@ -1732,6 +1735,7 @@
 				TargetAttributes = {
 					FAF91DB11B0A3A8F0002278C = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 97NL7NZ9K6;
 					};
 					FAF91DC91B0A3A8F0002278C = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -1773,6 +1777,7 @@
 				FAB088BD1B559378000DBADA /* Skyline in Resources */,
 				FAB0887C1B559378000DBADA /* SparseCore in Resources */,
 				FAB088941B559378000DBADA /* CMakeLists.txt in Resources */,
+				C6BF43C31B56D12200DB53B6 /* SeefeldWohnzimmerSquare.plist in Resources */,
 				FAB088A81B559378000DBADA /* SuperLUSupport in Resources */,
 				FAB088BB1B559378000DBADA /* OpenGLSupport in Resources */,
 				FAB088AD1B559378000DBADA /* AlignedVector3 in Resources */,
@@ -2047,6 +2052,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = BeaconNavigator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2060,6 +2066,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = BeaconNavigator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
