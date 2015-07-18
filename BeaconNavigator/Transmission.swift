@@ -12,11 +12,11 @@ class Transmission : NSObject {
     
     var beacon : CLBeacon
     var timestamp : NSDate
-    var accuracy : CGFloat
+    var distance : CGFloat
     
     required init(beacon : CLBeacon) {
         self.beacon = beacon
         self.timestamp = NSDate()
-        self.accuracy = CGFloat(beacon.accuracy)
+        self.distance = CGFloat(beacon.getDistance())
     }
 }

@@ -76,8 +76,8 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate {
                     beaconMinorPosition[beacon.minor.integerValue] = beaconMap.coordinateForBeacon(beacon)
                     
                     // Apply a distance for the beacon if there is a useful one
-                    if beacon.accuracy > 0 {
-                        beaconMapView.beaconDistances[beacon.minor.integerValue] = CGFloat(beacon.accuracy)
+                    if beacon.getDistance() > 0 {
+                        beaconMapView.beaconDistances[beacon.minor.integerValue] = CGFloat(beacon.getDistance())
                     }
                 }
                 

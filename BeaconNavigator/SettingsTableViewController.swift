@@ -28,13 +28,20 @@ class SettingsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return section == 0 ? 3 : 0
+        switch section {
+        case 0:
+            return 3
+        case 1:
+            return 2
+        default:
+            return 0
+        }
     }
 
     
@@ -55,6 +62,16 @@ class SettingsTableViewController: UITableViewController {
                 break
             }
             cell.accessoryType = NSUserDefaults.standardUserDefaults().integerForKey("LocationMethod") == indexPath.row ? .Checkmark : .None
+        case 1:
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = "Beacon Accuracy"
+            case 1:
+                cell.textLabel?.text = "Accuracy calculated by RSSI"
+            default:
+                break
+            }
+            cell.accessoryType = NSUserDefaults.standardUserDefaults().integerForKey("DistanceType") == indexPath.row ? .Checkmark : .None
         default:
             break
         }
@@ -68,6 +85,8 @@ class SettingsTableViewController: UITableViewController {
         switch indexPath.section {
         case 0:
             NSUserDefaults.standardUserDefaults().setInteger(indexPath.row, forKey: "LocationMethod")
+        case 1:
+            NSUserDefaults.standardUserDefaults().setInteger(indexPath.row, forKey: "DistanceType")
         default:
             break
         }
@@ -78,6 +97,8 @@ class SettingsTableViewController: UITableViewController {
         switch section {
         case 0:
             return "Location Method"
+        case 1:
+            return "Distance Type"
         default:
             break
         }

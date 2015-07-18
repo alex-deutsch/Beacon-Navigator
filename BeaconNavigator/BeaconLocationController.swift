@@ -29,7 +29,7 @@ class BeaconLocationController {
         // Only use beacons which are on the map
         var usableBeacons = beacons.filter() { return beaconMap.beaconIsOnMap($0) }
         // remove beacons with negative accuracy
-        usableBeacons = usableBeacons.filter() { return $0.accuracy > 0 }
+        usableBeacons = usableBeacons.filter() { return $0.getDistance() > 0 }
         
         if usableBeacons.count < 3 {
             error = NSError(domain: BeaconErrorDomain, code: 1, userInfo: ["description":"Less then 3 Beacons have a positive Accuracy"])
@@ -138,9 +138,9 @@ class BeaconLocationController {
             
             var beaconP3T = transformPointToNewCoordinateSystem2D(beaconP3, translationVector: translationVector, translationAngle: Double(translationAngle))
             
-            var distance1T = CGFloat(beacon1.accuracy)
-            var distance2T = CGFloat(beacon2.accuracy)
-            var distance3T = CGFloat(beacon3.accuracy)
+            var distance1T = CGFloat(beacon1.getDistance())
+            var distance2T = CGFloat(beacon2.getDistance())
+            var distance3T = CGFloat(beacon3.getDistance())
 
             // Algorithm from http://stackoverflow.com/questions/16176656/trilateration-and-locating-the-point-x-y-z // This actually sucks
             let xPositionT1 = (pow(distance1T) - pow(distance2T) + pow(beaconP2T.x)) / (2 * beaconP2T.x)
@@ -170,7 +170,7 @@ class BeaconLocationController {
         var transmissions : [NSDictionary] = []
         for beacon in beacons {
             if let beaconCoordinate = map.coordinateForBeacon(beacon) {
-                var transmission = ["x":beaconCoordinate.x,"y":beaconCoordinate.y,"accuracy":beacon.accuracy]
+                var transmission = ["x":beaconCoordinate.x,"y":beaconCoordinate.y,"accuracy":beacon.getDistance()]
                 transmissions.append(transmission)
             }
 
@@ -187,7 +187,7 @@ class BeaconLocationController {
         var transmissions : [NSDictionary] = []
         for beacon in beacons {
             if let beaconCoordinate = map.coordinateForBeacon(beacon) {
-                var transmission = ["x":beaconCoordinate.x,"y":beaconCoordinate.y,"accuracy":beacon.accuracy]
+                var transmission = ["x":beaconCoordinate.x,"y":beaconCoordinate.y,"accuracy":beacon.getDistance()]
                 transmissions.append(transmission)
             }
             

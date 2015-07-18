@@ -25,7 +25,7 @@ class BeaconTableViewController: UITableViewController, CLLocationManagerDelegat
         
         cell.imageView?.image = UIImage(named: "beacon_blue")
         cell.textLabel?.text = "Major: \(beacon.major) Minor: \(beacon.minor)"
-        cell.detailTextLabel?.text = "Accuracy: \(beacon.accuracy), RSSI: \(beacon.rssi)"
+        cell.detailTextLabel?.text = "Accuracy: \(beacon.accuracy) CAccuracy: \(beacon.getAccuracyCalculatedByRSSI()), RSSI: \(beacon.rssi)"
         
         return cell
     }
@@ -43,8 +43,16 @@ class BeaconTableViewController: UITableViewController, CLLocationManagerDelegat
     }
     
     func didUpdateBeacons(notification : NSNotification) {
-        var updatedBeacons : [CLBeacon] = notification.userInfo!["beacons"] as! [CLBeacon]
-        beacons = updatedBeacons
+        var updatedBeacons = notification.userInfo!["beacons"] as! [CLBeacon]
+        self.beacons = updatedBeacons
+        self.beacons!.sort { (beacon1, beacon2) in return beacon1.minor.integerValue > beacon2.minor.integerValue }
         tableView.reloadData()
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let beacon = self.beacons?[indexPath.row]
+        let beaconViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("BeaconViewController") as! BeaconViewController
+        beaconViewController.beacon = beacon
+        self.navigationController?.pushViewController(beaconViewController, animated: true)
     }
 }
