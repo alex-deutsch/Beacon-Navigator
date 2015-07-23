@@ -13,6 +13,7 @@ class BeaconViewController : UIViewController {
     
     @IBOutlet var beaconNameLabel : UILabel!
     @IBOutlet var beaconAccuracyLabel : UILabel!
+    @IBOutlet var beaconRSSILabel : UILabel!
     var beacon : CLBeacon?
     
     override func viewWillAppear(animated: Bool) {
@@ -30,6 +31,7 @@ class BeaconViewController : UIViewController {
                 if currentBeacon.minor == beacon?.minor {
                     self.beacon = currentBeacon
                     beaconAccuracyLabel.text = "Distance: \(self.beacon!.getDistance()) m"
+                    beaconRSSILabel.text = "RSSI: \(self.beacon?.rssi) db"
                 }
             }
         }
