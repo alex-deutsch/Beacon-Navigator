@@ -15,7 +15,7 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate {
     @IBOutlet var beaconMapView : BeaconMapView!
     @IBOutlet weak var positionLabel: UILabel!
     @IBOutlet weak var userdefinedPositionLabel: UILabel!
-    @IBOutlet weak var logTextView: UITextView!
+    @IBOutlet weak var varianzLabel :UILabel!
     @IBOutlet var rightBarButtonItem : UIBarButtonItem!
     
     var trackPositions = false {
@@ -28,7 +28,7 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate {
     
     var trackedPositions : [CGPoint] = [] {
         didSet {
-            self.logTextView.text = "\(trackedPositions.map { $0.formatedString() })"
+            //self.logTextView.text = "\(trackedPositions.map { $0.formatedString() })"
             self.beaconMapView.trackedPositions = trackedPositions
         }
     }
@@ -138,7 +138,7 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate {
     @IBAction func generatePDFClicked() {
         if let beaconName = beaconMap?.name {
             let pdfManager = BeaconMapPDFCreator(name: beaconName)
-            pdfManager.generatePDF(beaconMapView, loggedPositionsString: logTextView.text, currentPositionsString: positionLabel.text!, userPositionsString: userdefinedPositionLabel.text!)
+            pdfManager.generatePDF(beaconMapView, loggedPositionsString: varianzLabel.text!, currentPositionsString: positionLabel.text!, userPositionsString: userdefinedPositionLabel.text!)
             pdfManager.openPDF(self)
         }
     }

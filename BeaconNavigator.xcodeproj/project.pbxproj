@@ -139,6 +139,8 @@
 		FAB088D81B55941D000DBADA /* Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB088D71B55941D000DBADA /* Transmission.swift */; };
 		FACAC2771B3B036300C41B41 /* CGPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACAC2761B3B036300C41B41 /* CGPoint+Extension.swift */; };
 		FACAC2791B3B064200C41B41 /* BeaconNavigatorDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACAC2781B3B064200C41B41 /* BeaconNavigatorDefines.swift */; };
+		FAD916731BA18C4200F00770 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD916711BA18C4200F00770 /* Fabric.framework */; };
+		FAD916741BA18C4200F00770 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD916721BA18C4200F00770 /* Crashlytics.framework */; };
 		FADB4ABE1B616651000FDB11 /* Wohnung 9 Beacons.plist in Resources */ = {isa = PBXBuildFile; fileRef = FADB4ABD1B616651000FDB11 /* Wohnung 9 Beacons.plist */; };
 		FAF91DB81B0A3A8F0002278C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF91DB71B0A3A8F0002278C /* AppDelegate.swift */; };
 		FAF91DBB1B0A3A8F0002278C /* BeaconNavigator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAF91DB91B0A3A8F0002278C /* BeaconNavigator.xcdatamodeld */; };
@@ -617,6 +619,8 @@
 		FAB088D71B55941D000DBADA /* Transmission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transmission.swift; sourceTree = "<group>"; };
 		FACAC2761B3B036300C41B41 /* CGPoint+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extension.swift"; sourceTree = "<group>"; };
 		FACAC2781B3B064200C41B41 /* BeaconNavigatorDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconNavigatorDefines.swift; sourceTree = "<group>"; };
+		FAD916711BA18C4200F00770 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = ../Fabric.framework; sourceTree = "<group>"; };
+		FAD916721BA18C4200F00770 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = ../Crashlytics.framework; sourceTree = "<group>"; };
 		FADB4ABD1B616651000FDB11 /* Wohnung 9 Beacons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Wohnung 9 Beacons.plist"; sourceTree = "<group>"; };
 		FAF91DB21B0A3A8F0002278C /* BeaconNavigator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaconNavigator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF91DB61B0A3A8F0002278C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -640,6 +644,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAB0866A1B5529A4000DBADA /* Accelerate.framework in Frameworks */,
+				FAD916741BA18C4200F00770 /* Crashlytics.framework in Frameworks */,
+				FAD916731BA18C4200F00770 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1671,6 +1677,8 @@
 		FAF91DB51B0A3A8F0002278C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FAD916711BA18C4200F00770 /* Fabric.framework */,
+				FAD916721BA18C4200F00770 /* Crashlytics.framework */,
 				FAB086691B5529A4000DBADA /* Accelerate.framework */,
 				FAF91DB61B0A3A8F0002278C /* Info.plist */,
 				FAB0866B1B5540CA000DBADA /* BeaconNavigator-Bridging-Header.h */,
@@ -1705,6 +1713,7 @@
 				FAF91DAE1B0A3A8F0002278C /* Sources */,
 				FAF91DAF1B0A3A8F0002278C /* Frameworks */,
 				FAF91DB01B0A3A8F0002278C /* Resources */,
+				FAD916701BA18C0A00F00770 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1739,6 +1748,7 @@
 		FAF91DAA1B0A3A8F0002278C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Alexander Deutsch";
 				TargetAttributes = {
@@ -1908,6 +1918,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		FAD916701BA18C0A00F00770 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 4961cf2e4635f7fffeb6dc2ed0692ef6280ad944 600cd5df5f83f520c4c0fce40036a52d4814c3197a47eb532d2ffb200d0d443e";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FAF91DAE1B0A3A8F0002278C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -2065,6 +2091,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = BeaconNavigator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2079,6 +2109,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = BeaconNavigator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

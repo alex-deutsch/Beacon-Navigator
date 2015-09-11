@@ -40,12 +40,7 @@ class BeaconLocationController {
         let beacon1 = usableBeacons[0]
         let beacon2 = usableBeacons[1]
         let beacon3 = usableBeacons[2]
-        
-        // TODO: if there are more than 2 beacons, check if the first 3 beacons share the same minor or major id. if so take the 4th or 5th, ... beacon instead
-        
-        
 
-        
         let beaconCoordinates = beaconMap.beaconCoordinatesForBeacons(usableBeacons)
         
         if beaconCoordinates.count < 2 {
@@ -105,8 +100,6 @@ class BeaconLocationController {
         beaconP2 = map.coordinateForBeacon(beacon2),
         beaconP3 = map.coordinateForBeacon(beacon3)
         {
-            // TODO: Implement
-            
             // Translation Vector (if P1 is not (0,0))
             let translationVector = CGPointMake( -beaconP1.x, -beaconP1.y)
             
