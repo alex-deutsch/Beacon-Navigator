@@ -15,7 +15,7 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate {
     @IBOutlet var beaconMapView : BeaconMapView!
     @IBOutlet weak var positionLabel: UILabel!
     @IBOutlet weak var userdefinedPositionLabel: UILabel!
-    @IBOutlet weak var varianzLabel :UILabel!
+    @IBOutlet weak var varianzLabel : UILabel!
     @IBOutlet var rightBarButtonItem : UIBarButtonItem!
     
     var trackPositions = false {
@@ -30,8 +30,20 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate {
         didSet {
             //self.logTextView.text = "\(trackedPositions.map { $0.formatedString() })"
             self.beaconMapView.trackedPositions = trackedPositions
+            
+            // calculate variance
+            self.calculateExpectationValue()
         }
     }
+    
+    var expectationValue : CGFloat = 0 {
+        didSet {
+            self.varianzLabel.text = "Varianz: \(expectationValue)"
+            self.calculateVariance()
+        }
+    }
+    var variance : CGFloat = 0
+    
     var beaconMap : BeaconMap?
     
     // logged beaconPosition
@@ -141,5 +153,20 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate {
             pdfManager.generatePDF(beaconMapView, loggedPositionsString: varianzLabel.text!, currentPositionsString: positionLabel.text!, userPositionsString: userdefinedPositionLabel.text!)
             pdfManager.openPDF(self)
         }
+    }
+    
+    
+    // internal funcs
+    
+    internal func calculateExpectationValue() {
+        expectationValue = 0
+        guard let userPosition = self.beaconMapView.userdefinedPosition else { return }
+        for var i = 1; i <= trackedPositions.count; i++ {
+            let distance = trackedPositions[i-1].distanceToPoint(userPosition)
+            expectationValue += CGFloat(i) * distance
+        }
+    }
+    internal func calculateVariance() {
+
     }
 }

@@ -49,6 +49,7 @@ class BeaconLocationController {
                 for var i = 0; i <= beaconNumberfilterSettings + 1; i++ {
                     beaconArray.append(usableBeacons[i])
                 }
+                usableBeacons = beaconArray
             }
 
         }
@@ -245,19 +246,6 @@ class BeaconLocationController {
         return adjustedPoint
     }
     
-    /* Calculates Distance between 2 Points
-    *
-    @param pointA the first point
-    @param pointB the second point
-    @return distance between given points
-    *
-    */
-    private func distanceBetweenPoints(pointA : CGPoint, pointB : CGPoint) -> CGFloat {
-        let value = pow(pointB.x - pointA.x) + pow(pointB.y - pointA.y)
-        let value2 = fabsf(Float(value))
-        let value3 = sqrt(value2)
-        return CGFloat(value3)
-    }
     
     /* Transforms a point to a new Coordinate System
     @param point the point to be transleted

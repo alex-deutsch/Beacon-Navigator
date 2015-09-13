@@ -46,7 +46,7 @@ class SettingsTableViewController: UITableViewController {
             return 2
         case 2:
             return 7
-        case 2:
+        case 3:
             return 2
         default:
             return 0
