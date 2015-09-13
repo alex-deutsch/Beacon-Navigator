@@ -76,7 +76,7 @@ class BeaconMapPDFCreator : NSObject, UIDocumentInteractionControllerDelegate {
     
     func addView(view : UIView, atPoint point : CGPoint) -> CGRect {
         let context = UIGraphicsGetCurrentContext()
-        view.layer.renderInContext(context)
+        view.layer.renderInContext(context!)
         return view.frame
     }
     
@@ -98,12 +98,10 @@ class BeaconMapPDFCreator : NSObject, UIDocumentInteractionControllerDelegate {
     func openPDF(baseViewController : UIViewController) {
         baseViewControllerForPreview = baseViewController
         let documentInteractionVC = UIDocumentInteractionController()
-        if let pdfURL = NSURL(fileURLWithPath: pdfPath) {
-    
-            documentInteractionVC.URL = pdfURL
-            documentInteractionVC.delegate = self
-            documentInteractionVC.presentPreviewAnimated(true)
-        }
+        let pdfURL = NSURL(fileURLWithPath: pdfPath)
+        documentInteractionVC.URL = pdfURL
+        documentInteractionVC.delegate = self
+        documentInteractionVC.presentPreviewAnimated(true)
         
     }
     func documentInteractionControllerViewControllerForPreview(controller: UIDocumentInteractionController) -> UIViewController {

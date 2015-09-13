@@ -19,7 +19,7 @@ class BeaconTableViewController: UITableViewController, CLLocationManagerDelegat
     var beacons : [CLBeacon]?
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier) as UITableViewCell!
         
         let beacon = beacons![indexPath.row]
         
@@ -43,9 +43,9 @@ class BeaconTableViewController: UITableViewController, CLLocationManagerDelegat
     }
     
     func didUpdateBeacons(notification : NSNotification) {
-        var updatedBeacons = notification.userInfo!["beacons"] as! [CLBeacon]
+        let updatedBeacons = notification.userInfo!["beacons"] as! [CLBeacon]
         self.beacons = updatedBeacons
-        self.beacons!.sort { (beacon1, beacon2) in return beacon1.minor.integerValue > beacon2.minor.integerValue }
+        self.beacons!.sortInPlace { (beacon1, beacon2) in return beacon1.minor.integerValue > beacon2.minor.integerValue }
         tableView.reloadData()
     }
     

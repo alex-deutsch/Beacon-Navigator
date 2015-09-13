@@ -18,14 +18,14 @@ class ViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "main2beaconList" {
-            if let viewController = segue.destinationViewController as? BeaconTableViewController {
-            }
-        }
+//        if segue.identifier == "main2beaconList" {
+//            if let viewController = segue.destinationViewController as? BeaconTableViewController {
+//            }
+//        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
         
         switch indexPath.section {
         case 0:

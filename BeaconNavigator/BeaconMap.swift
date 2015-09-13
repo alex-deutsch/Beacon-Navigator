@@ -43,7 +43,7 @@ class BeaconMap {
                 // Read Beacon Coordinates
                 for (beaconMinor, coordinate) in beacons {
                     let coordinate = CGPoint(x: CGFloat(coordinate["x"]!.floatValue), y: CGFloat(coordinate["y"]!.floatValue))
-                    beaconCoordinates[beaconMinor.toInt()!] = coordinate
+                    beaconCoordinates[Int(beaconMinor)!] = coordinate
                     
                 }
         }
@@ -82,6 +82,6 @@ class BeaconMap {
     @return boolean value if the beacon positioned on in this map
     */
     func beaconIsOnMap(beacon : CLBeacon) -> Bool {
-        return contains(beaconCoordinates.keys.array, beacon.minor.integerValue)
+        return beaconCoordinates.keys.contains(beacon.minor.integerValue)
     }
 }

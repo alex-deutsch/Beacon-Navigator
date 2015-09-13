@@ -123,17 +123,17 @@ class BeaconLocationController {
                 }
             }
             
-            let angleInDegree = RadiansToDegrees(translationAngle)
+            //let angleInDegree = RadiansToDegrees(translationAngle)
             
-            var beaconP1T = transformPointToNewCoordinateSystem2D(beaconP1, translationVector: translationVector, translationAngle: Double(translationAngle))
+            //var beaconP1T = transformPointToNewCoordinateSystem2D(beaconP1, translationVector: translationVector, translationAngle: Double(translationAngle))
             
-            var beaconP2T = transformPointToNewCoordinateSystem2D(beaconP2, translationVector: translationVector, translationAngle: Double(translationAngle))
+            let beaconP2T = transformPointToNewCoordinateSystem2D(beaconP2, translationVector: translationVector, translationAngle: Double(translationAngle))
             
-            var beaconP3T = transformPointToNewCoordinateSystem2D(beaconP3, translationVector: translationVector, translationAngle: Double(translationAngle))
+            let beaconP3T = transformPointToNewCoordinateSystem2D(beaconP3, translationVector: translationVector, translationAngle: Double(translationAngle))
             
-            var distance1T = CGFloat(beacon1.getDistance())
-            var distance2T = CGFloat(beacon2.getDistance())
-            var distance3T = CGFloat(beacon3.getDistance())
+            let distance1T = CGFloat(beacon1.getDistance())
+            let distance2T = CGFloat(beacon2.getDistance())
+            let distance3T = CGFloat(beacon3.getDistance())
 
             // Algorithm from http://stackoverflow.com/questions/16176656/trilateration-and-locating-the-point-x-y-z // This actually sucks
             let xPositionT1 = (pow(distance1T) - pow(distance2T) + pow(beaconP2T.x)) / (2 * beaconP2T.x)
@@ -163,7 +163,7 @@ class BeaconLocationController {
         var transmissions : [NSDictionary] = []
         for beacon in beacons {
             if let beaconCoordinate = map.coordinateForBeacon(beacon) {
-                var transmission = ["x":beaconCoordinate.x,"y":beaconCoordinate.y,"accuracy":beacon.getDistance()]
+                let transmission = ["x":beaconCoordinate.x,"y":beaconCoordinate.y,"accuracy":beacon.getDistance()]
                 transmissions.append(transmission)
             }
 
@@ -180,7 +180,7 @@ class BeaconLocationController {
         var transmissions : [NSDictionary] = []
         for beacon in beacons {
             if let beaconCoordinate = map.coordinateForBeacon(beacon) {
-                var transmission = ["x":beaconCoordinate.x,"y":beaconCoordinate.y,"accuracy":beacon.getDistance()]
+                let transmission = ["x":beaconCoordinate.x,"y":beaconCoordinate.y,"accuracy":beacon.getDistance()]
                 transmissions.append(transmission)
             }
             
@@ -213,7 +213,7 @@ class BeaconLocationController {
     
     func adjustLocationToBeInsideMap(location : Location, map : BeaconMap) -> Location {
         // Adjust Position so it will always be inside the Map
-        var adjustedPoint = location
+        let adjustedPoint = location
         adjustedPoint.x = max(0, adjustedPoint.x)
         adjustedPoint.x = min(adjustedPoint.x, map.maxPoint.x)
         adjustedPoint.y = max(0, adjustedPoint.y)

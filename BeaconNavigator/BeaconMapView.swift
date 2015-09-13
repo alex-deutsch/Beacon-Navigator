@@ -77,7 +77,7 @@ class BeaconMapView : UIView {
             }
         }
         
-        var adjustedMapSize = CGSizeMake(biggestX, biggestY)
+        let adjustedMapSize = CGSizeMake(biggestX, biggestY)
         
         // Check which sides are the bigger ones
         if (rect.width > rect.height && biggestY > biggestX) || (rect.height > rect.width && biggestY < biggestX) {
@@ -101,7 +101,7 @@ class BeaconMapView : UIView {
         
         // Draw Edges and lines  (Walls)
         if edgePoints?.count > 0 {
-            var wallPath = UIBezierPath()
+            let wallPath = UIBezierPath()
             for var i = 0; i < edgePoints!.count; i++ {
                 let edgePoint = edgePoints![i]
                 let targetPoint = CGPointMake(edgePoint.x * scaleXY, edgePoint.y * scaleXY)
@@ -123,7 +123,7 @@ class BeaconMapView : UIView {
         // Draw Beacon Points
         if let beaconPoints = beaconPoints {
             for (minor, beaconPoint) in beaconPoints {
-                if contains(usedBeacons, minor) {
+                if usedBeacons.contains(minor) {
                     drawPointAtPosition(beaconPoint, color: beaconPointColorUsed)
                 }
                 else {
@@ -177,15 +177,15 @@ class BeaconMapView : UIView {
     }
     
     // Track Touches to set User Defined Position
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
-        let touch = touches.first as? UITouch
+        guard let touch = touches.first as UITouch? else { return }
         setUserDefinedPositionFromTouch(touch)
     }
     
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesMoved(touches, withEvent: event)
-        let touch = touches.first as? UITouch
+        guard let touch = touches.first as UITouch? else { return }
         setUserDefinedPositionFromTouch(touch)
     }
 }

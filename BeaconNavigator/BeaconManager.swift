@@ -13,7 +13,7 @@ let BeaconManagerDidUpdateAvailableBeacons = "beaconManagerDidUpdateAvailableBea
 
 class BeaconManager : NSObject, CLLocationManagerDelegate {
     
-    let region = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D"), identifier: "Estimotes")
+    let region = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!, identifier: "Estimotes")
     
     static let sharedInstance = BeaconManager()
     
@@ -38,15 +38,15 @@ class BeaconManager : NSObject, CLLocationManagerDelegate {
     }
     
     
-    func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
+    func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {
         
-        currentAvailableBeacons = beacons as! [CLBeacon]
-        allKnownBeacons += beacons as! [CLBeacon]
+        currentAvailableBeacons = beacons 
+        allKnownBeacons += beacons 
 
         NSNotificationCenter.defaultCenter().postNotificationName(BeaconManagerDidUpdateAvailableBeacons, object: nil, userInfo: ["beacons":beacons])
     }
     
-    func locationManager(manager: CLLocationManager!, rangingBeaconsDidFailForRegion region: CLBeaconRegion!, withError error: NSError!) {
+    func locationManager(manager: CLLocationManager, rangingBeaconsDidFailForRegion region: CLBeaconRegion, withError error: NSError) {
     }
     
 }

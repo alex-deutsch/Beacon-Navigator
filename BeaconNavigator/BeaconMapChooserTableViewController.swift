@@ -20,7 +20,7 @@ class BeaconMapChooserTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier) as UITableViewCell!
         
         let map = maps[indexPath.row]
         
@@ -42,7 +42,7 @@ class BeaconMapChooserTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "mapChoose2Map" {
             if let viewController = segue.destinationViewController as? BeaconMapViewController {
-                let map = maps[tableView.indexPathForSelectedRow()!.row]
+                let map = maps[tableView.indexPathForSelectedRow!.row]
                 viewController.beaconMap = map
             }
         }
