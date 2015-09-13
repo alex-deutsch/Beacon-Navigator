@@ -8,6 +8,11 @@
 
 import UIKit
 
+let BeaconSettingsLocationMethod = "BeaconSettingsLocationMethod"
+let BeaconSettingsDistanceType = "BeaconSettingsDistanceType"
+let BeaconSettingsBeaconNumber = "BeaconSettingsBeaconNumber"
+let BeaconSettingsBeaconDistance = "BeaconSettingsBeaconDistance"
+
 class SettingsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
@@ -28,7 +33,7 @@ class SettingsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 4
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -38,6 +43,10 @@ class SettingsTableViewController: UITableViewController {
         case 0:
             return 3
         case 1:
+            return 2
+        case 2:
+            return 7
+        case 2:
             return 2
         default:
             return 0
@@ -61,7 +70,7 @@ class SettingsTableViewController: UITableViewController {
             default:
                 break
             }
-            cell.accessoryType = NSUserDefaults.standardUserDefaults().integerForKey("LocationMethod") == indexPath.row ? .Checkmark : .None
+            cell.accessoryType = NSUserDefaults.standardUserDefaults().integerForKey(BeaconSettingsLocationMethod) == indexPath.row ? .Checkmark : .None
         case 1:
             switch indexPath.row {
             case 0:
@@ -71,7 +80,37 @@ class SettingsTableViewController: UITableViewController {
             default:
                 break
             }
-            cell.accessoryType = NSUserDefaults.standardUserDefaults().integerForKey("DistanceType") == indexPath.row ? .Checkmark : .None
+            cell.accessoryType = NSUserDefaults.standardUserDefaults().integerForKey(BeaconSettingsDistanceType) == indexPath.row ? .Checkmark : .None
+        case 2:
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = "No Filter"
+            case 1:
+                cell.textLabel?.text = "Only 3 closest Beacons"
+            case 2:
+                cell.textLabel?.text = "Only 4 closest Beacons"
+            case 3:
+                cell.textLabel?.text = "Only 5 closest Beacons"
+            case 4:
+                cell.textLabel?.text = "Only 6 closest Beacons"
+            case 5:
+                cell.textLabel?.text = "Only 7 closest Beacons"
+            case 6:
+                cell.textLabel?.text = "Only 8 closest Beacons"
+            default:
+                break
+            }
+            cell.accessoryType = NSUserDefaults.standardUserDefaults().integerForKey(BeaconSettingsBeaconNumber) == indexPath.row ? .Checkmark : .None
+        case 2:
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = "No Filter"
+            case 1:
+                cell.textLabel?.text = "Only Beacons in Range of < 3m"
+            default:
+                break
+            }
+            cell.accessoryType = NSUserDefaults.standardUserDefaults().integerForKey(BeaconSettingsBeaconDistance) == indexPath.row ? .Checkmark : .None
         default:
             break
         }
@@ -84,9 +123,13 @@ class SettingsTableViewController: UITableViewController {
         
         switch indexPath.section {
         case 0:
-            NSUserDefaults.standardUserDefaults().setInteger(indexPath.row, forKey: "LocationMethod")
+            NSUserDefaults.standardUserDefaults().setInteger(indexPath.row, forKey: BeaconSettingsLocationMethod)
         case 1:
-            NSUserDefaults.standardUserDefaults().setInteger(indexPath.row, forKey: "DistanceType")
+            NSUserDefaults.standardUserDefaults().setInteger(indexPath.row, forKey: BeaconSettingsDistanceType)
+        case 2:
+            NSUserDefaults.standardUserDefaults().setInteger(indexPath.row, forKey: BeaconSettingsBeaconNumber)
+        case 3:
+            NSUserDefaults.standardUserDefaults().setInteger(indexPath.row, forKey: BeaconSettingsBeaconDistance)
         default:
             break
         }
@@ -99,6 +142,10 @@ class SettingsTableViewController: UITableViewController {
             return "Location Method"
         case 1:
             return "Distance Type"
+        case 2:
+            return "Number Of Beacons"
+        case 3:
+            return "Range of Beacons"
         default:
             break
         }

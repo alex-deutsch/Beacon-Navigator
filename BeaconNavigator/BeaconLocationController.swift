@@ -28,19 +28,40 @@ class BeaconLocationController {
         
         // Only use beacons which are on the map
         var usableBeacons = beacons.filter() { return beaconMap.beaconIsOnMap($0) }
+        
         // remove beacons with negative accuracy
         usableBeacons = usableBeacons.filter() { return $0.getDistance() > 0 }
         
+        // If there are no more than 3 Beacons available, no calculations are possible
         if usableBeacons.count < 3 {
             error = NSError(domain: BeaconErrorDomain, code: 1, userInfo: ["description":"Less then 3 Beacons have a positive Accuracy"])
             completionBlock(error: error, coordinates: nil, usedBeacons : usableBeacons)
             return
         }
         
-        let beacon1 = usableBeacons[0]
-        let beacon2 = usableBeacons[1]
-        let beacon3 = usableBeacons[2]
+        // Apply Beacon Filters from User Settings
+        let beaconNumberfilterSettings = NSUserDefaults.standardUserDefaults().integerForKey(BeaconSettingsBeaconNumber)
+        
+        switch beaconNumberfilterSettings {
+        default:
+            if usableBeacons.count > beaconNumberfilterSettings + 1 {
+                var beaconArray : [CLBeacon] = []
+                for var i = 0; i <= beaconNumberfilterSettings + 1; i++ {
+                    beaconArray.append(usableBeacons[i])
+                }
+            }
 
+        }
+        
+        let beaconDistanceFilterSettings = NSUserDefaults.standardUserDefaults().integerForKey(BeaconSettingsBeaconDistance)
+        
+        switch beaconDistanceFilterSettings {
+        case 1:
+            usableBeacons = usableBeacons.filter() { return $0.getDistance() < 3 }
+        default:
+            break
+        }
+        
         let beaconCoordinates = beaconMap.beaconCoordinatesForBeacons(usableBeacons)
         
         if beaconCoordinates.count < 2 {
@@ -49,27 +70,28 @@ class BeaconLocationController {
             return
         }
         else {
+            guard let threeClosestBeacons : [CLBeacon] = [beacons[0],beacons[1],beacons[2]] else { return }
             
             //Trilateration #1
-            if let position = trilaterate2D(beacon1, beacon2: beacon2, beacon3: beacon3, inMap: beaconMap) {
+            if let position = trilaterate2D(threeClosestBeacons, inMap: beaconMap) {
                 NSLog("Trilateration Result \(position.x), \(position.y), 0")
                 if locationMethod == .Trilateration {
-                    completionBlock(error: nil, coordinates: Location(x: position.x, y: position.y, z: 0), usedBeacons : [beacon1,beacon2,beacon3])
+                    completionBlock(error: nil, coordinates: Location(x: position.x, y: position.y, z: 0), usedBeacons : threeClosestBeacons)
                 }
             }
             else {
                 if locationMethod == .Trilateration {
                     error = NSError(domain: BeaconErrorDomain, code: 2, userInfo: ["trilaterion Error":"unknown Trilateration Error"])
-                    completionBlock(error: nil, coordinates: nil, usedBeacons : [beacon1,beacon2,beacon3])
+                    completionBlock(error: nil, coordinates: nil, usedBeacons : threeClosestBeacons)
                 }
             }
             
             // Trilateration #2
             
-            if let trilateration2Location = trilaterate3D([beacon1,beacon2,beacon3], map: beaconMap) {
+            if let trilateration2Location = trilaterate3D(threeClosestBeacons, map: beaconMap) {
                 NSLog("Trilateration #2  Result: \(trilateration2Location.x), \(trilateration2Location.y), \(trilateration2Location.z)")
                 if locationMethod == .TrilaterationAlternative {
-                completionBlock(error: nil, coordinates: trilateration2Location, usedBeacons: [beacon1,beacon2,beacon3])
+                completionBlock(error: nil, coordinates: trilateration2Location, usedBeacons: threeClosestBeacons)
                 }
             }
             
@@ -94,11 +116,11 @@ class BeaconLocationController {
     @param beaconP3
     @param the map the beacons are located in
     */
-    private func trilaterate2D(beacon1 : CLBeacon, beacon2 : CLBeacon, beacon3 : CLBeacon, inMap map : BeaconMap) -> CGPoint? {
+    private func trilaterate2D(beacons : [CLBeacon], inMap map : BeaconMap) -> CGPoint? {
         
-        if let beaconP1 = map.coordinateForBeacon(beacon1),
-        beaconP2 = map.coordinateForBeacon(beacon2),
-        beaconP3 = map.coordinateForBeacon(beacon3)
+        if let beaconP1 = map.coordinateForBeacon(beacons[0]),
+        beaconP2 = map.coordinateForBeacon(beacons[1]),
+        beaconP3 = map.coordinateForBeacon(beacons[2])
         {
             // Translation Vector (if P1 is not (0,0))
             let translationVector = CGPointMake( -beaconP1.x, -beaconP1.y)
@@ -131,9 +153,9 @@ class BeaconLocationController {
             
             let beaconP3T = transformPointToNewCoordinateSystem2D(beaconP3, translationVector: translationVector, translationAngle: Double(translationAngle))
             
-            let distance1T = CGFloat(beacon1.getDistance())
-            let distance2T = CGFloat(beacon2.getDistance())
-            let distance3T = CGFloat(beacon3.getDistance())
+            let distance1T = CGFloat(beacons[0].getDistance())
+            let distance2T = CGFloat(beacons[1].getDistance())
+            let distance3T = CGFloat(beacons[2].getDistance())
 
             // Algorithm from http://stackoverflow.com/questions/16176656/trilateration-and-locating-the-point-x-y-z // This actually sucks
             let xPositionT1 = (pow(distance1T) - pow(distance2T) + pow(beaconP2T.x)) / (2 * beaconP2T.x)
@@ -178,7 +200,9 @@ class BeaconLocationController {
     
     func trilaterate3D(beacons : [CLBeacon], map : BeaconMap) -> Location? {
         var transmissions : [NSDictionary] = []
-        for beacon in beacons {
+        
+        let threeClosestBeacons : [CLBeacon] = [beacons[0],beacons[1],beacons[2]]
+        for beacon in threeClosestBeacons {
             if let beaconCoordinate = map.coordinateForBeacon(beacon) {
                 let transmission = ["x":beaconCoordinate.x,"y":beaconCoordinate.y,"accuracy":beacon.getDistance()]
                 transmissions.append(transmission)

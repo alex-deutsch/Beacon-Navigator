@@ -12,7 +12,7 @@ import CoreLocation
 extension CLBeacon {
     
     func getDistance() -> CGFloat {
-        let distanceType = NSUserDefaults.standardUserDefaults().integerForKey("DistanceType")
+        let distanceType = NSUserDefaults.standardUserDefaults().integerForKey(BeaconSettingsDistanceType)
         switch distanceType {
         case 0:
             return CGFloat(accuracy)
