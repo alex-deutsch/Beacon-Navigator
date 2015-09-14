@@ -47,7 +47,7 @@ class SettingsTableViewController: UITableViewController {
         case 2:
             return 7
         case 3:
-            return 2
+            return 3
         default:
             return 0
         }
@@ -101,12 +101,14 @@ class SettingsTableViewController: UITableViewController {
                 break
             }
             cell.accessoryType = NSUserDefaults.standardUserDefaults().integerForKey(BeaconSettingsBeaconNumber) == indexPath.row ? .Checkmark : .None
-        case 2:
+        case 3:
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "No Filter"
             case 1:
                 cell.textLabel?.text = "Only Beacons in Range of < 3m"
+            case 2:
+                cell.textLabel?.text = "Only Beacons in Range of < 5m"
             default:
                 break
             }
@@ -121,6 +123,7 @@ class SettingsTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        NSLog("selected ROW: \(indexPath.row)")
         switch indexPath.section {
         case 0:
             NSUserDefaults.standardUserDefaults().setInteger(indexPath.row, forKey: BeaconSettingsLocationMethod)

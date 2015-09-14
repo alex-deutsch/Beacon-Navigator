@@ -43,6 +43,8 @@ class BeaconLocationController {
         let beaconNumberfilterSettings = NSUserDefaults.standardUserDefaults().integerForKey(BeaconSettingsBeaconNumber)
         
         switch beaconNumberfilterSettings {
+        case 0:
+            break
         default:
             if usableBeacons.count > beaconNumberfilterSettings + 1 {
                 var beaconArray : [CLBeacon] = []
@@ -99,7 +101,7 @@ class BeaconLocationController {
             // Multilateration
             
             let location = multilaterate(usableBeacons, map: beaconMap)
-            NSLog("Multilaterion Result: \(location.x), \(location.y), \(location.z)")
+            NSLog("Multilaterion Result: \(location?.x), \(location?.y), \(location?.z)")
             if locationMethod == .LeastSquares {
                 completionBlock(error: nil, coordinates: location, usedBeacons: usableBeacons)
             }
@@ -182,7 +184,7 @@ class BeaconLocationController {
         return nil
     }
     
-    func multilaterate(beacons : [CLBeacon], map : BeaconMap) -> Location {
+    func multilaterate(beacons : [CLBeacon], map : BeaconMap) -> Location? {
         var transmissions : [NSDictionary] = []
         for beacon in beacons {
             if let beaconCoordinate = map.coordinateForBeacon(beacon) {
@@ -192,7 +194,8 @@ class BeaconLocationController {
 
         }
         
-        let pointArray = NonLinear.determine(transmissions)
+        guard let pointArray = NonLinear.determine(transmissions) else { return nil }
+
         var location = Location(x: CGFloat(pointArray[0].floatValue), y: CGFloat(pointArray[1].floatValue), z: CGFloat(pointArray[2].floatValue))
         // adjust location to be inside map
         location = adjustLocationToBeInsideMap(location, map: map)

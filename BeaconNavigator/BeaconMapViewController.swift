@@ -15,7 +15,7 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate {
     @IBOutlet var beaconMapView : BeaconMapView!
     @IBOutlet weak var positionLabel: UILabel!
     @IBOutlet weak var userdefinedPositionLabel: UILabel!
-    @IBOutlet weak var varianzLabel : UILabel!
+    @IBOutlet weak var devationLabel : UILabel!
     @IBOutlet var rightBarButtonItem : UIBarButtonItem!
     
     var trackPositions = false {
@@ -32,17 +32,15 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate {
             self.beaconMapView.trackedPositions = trackedPositions
             
             // calculate variance
-            self.calculateExpectationValue()
+            self.calculateDeviation()
         }
     }
     
-    var expectationValue : CGFloat = 0 {
+    var deviation : CGFloat = 0 {
         didSet {
-            self.varianzLabel.text = "Varianz: \(expectationValue)"
-            self.calculateVariance()
+            self.devationLabel.text = "Records: \(self.trackedPositions.count) Devation: \(deviation)"
         }
     }
-    var variance : CGFloat = 0
     
     var beaconMap : BeaconMap?
     
@@ -150,7 +148,7 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate {
     @IBAction func generatePDFClicked() {
         if let beaconName = beaconMap?.name {
             let pdfManager = BeaconMapPDFCreator(name: beaconName)
-            pdfManager.generatePDF(beaconMapView, loggedPositionsString: varianzLabel.text!, currentPositionsString: positionLabel.text!, userPositionsString: userdefinedPositionLabel.text!)
+            pdfManager.generatePDF(beaconMapView, loggedPositionsString: devationLabel.text!, currentPositionsString: positionLabel.text!, userPositionsString: userdefinedPositionLabel.text!)
             pdfManager.openPDF(self)
         }
     }
@@ -158,15 +156,13 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate {
     
     // internal funcs
     
-    internal func calculateExpectationValue() {
-        expectationValue = 0
+    internal func calculateDeviation() {
+        deviation = 0
         guard let userPosition = self.beaconMapView.userdefinedPosition else { return }
         for var i = 1; i <= trackedPositions.count; i++ {
             let distance = trackedPositions[i-1].distanceToPoint(userPosition)
-            expectationValue += CGFloat(i) * distance
+            deviation += distance
         }
-    }
-    internal func calculateVariance() {
-
+        deviation /= CGFloat(trackedPositions.count)
     }
 }
