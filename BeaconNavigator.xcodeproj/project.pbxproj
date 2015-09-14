@@ -9,19 +9,17 @@
 /* Begin PBXBuildFile section */
 		C6BF43C31B56D12200DB53B6 /* SeefeldWohnzimmerSquare.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6BF43C21B56D12200DB53B6 /* SeefeldWohnzimmerSquare.plist */; };
 		FA034C2E1B3C2BAD00355DFD /* BeaconMapPDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA034C2D1B3C2BAD00355DFD /* BeaconMapPDFCreator.swift */; };
-		FA034C301B3C582000355DFD /* Medicare 3 Beacons.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA034C2F1B3C582000355DFD /* Medicare 3 Beacons.plist */; };
-		FA1BF43E1B34727200C727ED /* Wohnung.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA1BF43D1B34727200C727ED /* Wohnung.plist */; };
-		FA1BF4401B34D3B100C727ED /* Medicare 4 Beacons.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA1BF43F1B34D3B100C727ED /* Medicare 4 Beacons.plist */; };
 		FA28FE521B2893E5004F2666 /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28FE511B2893E5004F2666 /* BeaconManager.swift */; };
 		FA28FE551B29D94C004F2666 /* BeaconMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28FE541B29D94C004F2666 /* BeaconMapView.swift */; };
 		FA28FE571B29DBC6004F2666 /* BeaconMapChooserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28FE561B29DBC6004F2666 /* BeaconMapChooserTableViewController.swift */; };
 		FA28FE591B29DC1A004F2666 /* BeaconMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28FE581B29DC1A004F2666 /* BeaconMapManager.swift */; };
 		FA28FE5F1B2A46A2004F2666 /* BeaconMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28FE5E1B2A46A2004F2666 /* BeaconMapViewController.swift */; };
+		FA54B40B1BA76F1C0098508B /* TEGRoom.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA54B40A1BA76F1C0098508B /* TEGRoom.plist */; };
 		FA66F0851B27A11200930851 /* BeaconLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA66F0841B27A11200930851 /* BeaconLocationController.swift */; };
 		FA66F0871B27A62D00930851 /* BeaconMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA66F0861B27A62D00930851 /* BeaconMap.swift */; };
 		FA66F08B1B2889D700930851 /* SimpleQuad.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA66F08A1B2889D700930851 /* SimpleQuad.plist */; };
 		FA66F0901B2890E900930851 /* BeaconTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA66F08F1B2890E900930851 /* BeaconTableViewController.swift */; };
-		FA9F4F491B3D799D008680C2 /* Medicare 5 Beacons.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA9F4F481B3D799D008680C2 /* Medicare 5 Beacons.plist */; };
+		FA9F4F491B3D799D008680C2 /* Medicare.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA9F4F481B3D799D008680C2 /* Medicare.plist */; };
 		FAB0866A1B5529A4000DBADA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB086691B5529A4000DBADA /* Accelerate.framework */; };
 		FAB086701B55410D000DBADA /* EquationSolv.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB0866F1B55410D000DBADA /* EquationSolv.m */; };
 		FAB088651B559378000DBADA /* Array in Resources */ = {isa = PBXBuildFile; fileRef = FAB0867C1B559378000DBADA /* Array */; };
@@ -141,7 +139,7 @@
 		FACAC2791B3B064200C41B41 /* BeaconNavigatorDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACAC2781B3B064200C41B41 /* BeaconNavigatorDefines.swift */; };
 		FAD916731BA18C4200F00770 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD916711BA18C4200F00770 /* Fabric.framework */; };
 		FAD916741BA18C4200F00770 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD916721BA18C4200F00770 /* Crashlytics.framework */; };
-		FADB4ABE1B616651000FDB11 /* Wohnung 9 Beacons.plist in Resources */ = {isa = PBXBuildFile; fileRef = FADB4ABD1B616651000FDB11 /* Wohnung 9 Beacons.plist */; };
+		FADB4ABE1B616651000FDB11 /* Wohnung.plist in Resources */ = {isa = PBXBuildFile; fileRef = FADB4ABD1B616651000FDB11 /* Wohnung.plist */; };
 		FAF91DB81B0A3A8F0002278C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF91DB71B0A3A8F0002278C /* AppDelegate.swift */; };
 		FAF91DBB1B0A3A8F0002278C /* BeaconNavigator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAF91DB91B0A3A8F0002278C /* BeaconNavigator.xcdatamodeld */; };
 		FAF91DBD1B0A3A8F0002278C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF91DBC1B0A3A8F0002278C /* ViewController.swift */; };
@@ -168,19 +166,17 @@
 /* Begin PBXFileReference section */
 		C6BF43C21B56D12200DB53B6 /* SeefeldWohnzimmerSquare.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SeefeldWohnzimmerSquare.plist; sourceTree = "<group>"; };
 		FA034C2D1B3C2BAD00355DFD /* BeaconMapPDFCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconMapPDFCreator.swift; sourceTree = "<group>"; };
-		FA034C2F1B3C582000355DFD /* Medicare 3 Beacons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Medicare 3 Beacons.plist"; sourceTree = "<group>"; };
-		FA1BF43D1B34727200C727ED /* Wohnung.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Wohnung.plist; sourceTree = "<group>"; };
-		FA1BF43F1B34D3B100C727ED /* Medicare 4 Beacons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Medicare 4 Beacons.plist"; sourceTree = "<group>"; };
 		FA28FE511B2893E5004F2666 /* BeaconManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconManager.swift; sourceTree = "<group>"; };
 		FA28FE541B29D94C004F2666 /* BeaconMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconMapView.swift; sourceTree = "<group>"; };
 		FA28FE561B29DBC6004F2666 /* BeaconMapChooserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconMapChooserTableViewController.swift; sourceTree = "<group>"; };
 		FA28FE581B29DC1A004F2666 /* BeaconMapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconMapManager.swift; sourceTree = "<group>"; };
 		FA28FE5E1B2A46A2004F2666 /* BeaconMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconMapViewController.swift; sourceTree = "<group>"; };
+		FA54B40A1BA76F1C0098508B /* TEGRoom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TEGRoom.plist; sourceTree = "<group>"; };
 		FA66F0841B27A11200930851 /* BeaconLocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BeaconLocationController.swift; path = ../BeaconLocationController.swift; sourceTree = "<group>"; };
 		FA66F0861B27A62D00930851 /* BeaconMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconMap.swift; sourceTree = "<group>"; };
 		FA66F08A1B2889D700930851 /* SimpleQuad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SimpleQuad.plist; sourceTree = "<group>"; };
 		FA66F08F1B2890E900930851 /* BeaconTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconTableViewController.swift; sourceTree = "<group>"; };
-		FA9F4F481B3D799D008680C2 /* Medicare 5 Beacons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Medicare 5 Beacons.plist"; sourceTree = "<group>"; };
+		FA9F4F481B3D799D008680C2 /* Medicare.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Medicare.plist; sourceTree = "<group>"; };
 		FAB086691B5529A4000DBADA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		FAB0866B1B5540CA000DBADA /* BeaconNavigator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BeaconNavigator-Bridging-Header.h"; sourceTree = "<group>"; };
 		FAB0866F1B55410D000DBADA /* EquationSolv.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquationSolv.m; sourceTree = "<group>"; };
@@ -621,7 +617,7 @@
 		FACAC2781B3B064200C41B41 /* BeaconNavigatorDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconNavigatorDefines.swift; sourceTree = "<group>"; };
 		FAD916711BA18C4200F00770 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = ../Fabric.framework; sourceTree = "<group>"; };
 		FAD916721BA18C4200F00770 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = ../Crashlytics.framework; sourceTree = "<group>"; };
-		FADB4ABD1B616651000FDB11 /* Wohnung 9 Beacons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Wohnung 9 Beacons.plist"; sourceTree = "<group>"; };
+		FADB4ABD1B616651000FDB11 /* Wohnung.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Wohnung.plist; sourceTree = "<group>"; };
 		FAF91DB21B0A3A8F0002278C /* BeaconNavigator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaconNavigator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF91DB61B0A3A8F0002278C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAF91DB71B0A3A8F0002278C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -683,11 +679,9 @@
 			isa = PBXGroup;
 			children = (
 				FA66F08A1B2889D700930851 /* SimpleQuad.plist */,
-				FA1BF43D1B34727200C727ED /* Wohnung.plist */,
-				FADB4ABD1B616651000FDB11 /* Wohnung 9 Beacons.plist */,
-				FA034C2F1B3C582000355DFD /* Medicare 3 Beacons.plist */,
-				FA1BF43F1B34D3B100C727ED /* Medicare 4 Beacons.plist */,
-				FA9F4F481B3D799D008680C2 /* Medicare 5 Beacons.plist */,
+				FADB4ABD1B616651000FDB11 /* Wohnung.plist */,
+				FA54B40A1BA76F1C0098508B /* TEGRoom.plist */,
+				FA9F4F481B3D799D008680C2 /* Medicare.plist */,
 				C6BF43C21B56D12200DB53B6 /* SeefeldWohnzimmerSquare.plist */,
 			);
 			name = "Beacon Maps";
@@ -1822,7 +1816,6 @@
 				FAB088901B559378000DBADA /* CMakeLists.txt in Resources */,
 				FAB088D21B559378000DBADA /* TODOBdcsvd.txt in Resources */,
 				FAB0888A1B559378000DBADA /* CMakeLists.txt in Resources */,
-				FA034C301B3C582000355DFD /* Medicare 3 Beacons.plist in Resources */,
 				FAB088811B559378000DBADA /* CMakeLists.txt in Resources */,
 				FAB088691B559378000DBADA /* Core in Resources */,
 				FAB088821B559378000DBADA /* CMakeLists.txt in Resources */,
@@ -1841,7 +1834,6 @@
 				FAB0887A1B559378000DBADA /* Sparse in Resources */,
 				FAB0887B1B559378000DBADA /* SparseCholesky in Resources */,
 				FAB088CF1B559378000DBADA /* CMakeLists.txt in Resources */,
-				FA1BF4401B34D3B100C727ED /* Medicare 4 Beacons.plist in Resources */,
 				FAB0888E1B559378000DBADA /* CMakeLists.txt in Resources */,
 				FAB088651B559378000DBADA /* Array in Resources */,
 				FAB0886F1B559378000DBADA /* Householder in Resources */,
@@ -1853,8 +1845,8 @@
 				FAB088A11B559378000DBADA /* CMakeLists.txt in Resources */,
 				FAB088CD1B559378000DBADA /* CMakeLists.txt in Resources */,
 				FAB088731B559378000DBADA /* LU in Resources */,
-				FA1BF43E1B34727200C727ED /* Wohnung.plist in Resources */,
-				FADB4ABE1B616651000FDB11 /* Wohnung 9 Beacons.plist in Resources */,
+				FADB4ABE1B616651000FDB11 /* Wohnung.plist in Resources */,
+				FA54B40B1BA76F1C0098508B /* TEGRoom.plist in Resources */,
 				FAB088AF1B559378000DBADA /* AutoDiff in Resources */,
 				FAB088711B559378000DBADA /* Jacobi in Resources */,
 				FAB0889E1B559378000DBADA /* CMakeLists.txt in Resources */,
@@ -1867,7 +1859,7 @@
 				FAB088CE1B559378000DBADA /* CMakeLists.txt in Resources */,
 				FAB088771B559378000DBADA /* PaStiXSupport in Resources */,
 				FAB0889C1B559378000DBADA /* CMakeLists.txt in Resources */,
-				FA9F4F491B3D799D008680C2 /* Medicare 5 Beacons.plist in Resources */,
+				FA9F4F491B3D799D008680C2 /* Medicare.plist in Resources */,
 				FAB088B31B559378000DBADA /* IterativeSolvers in Resources */,
 				FAB088981B559378000DBADA /* CMakeLists.txt in Resources */,
 				FAB088861B559378000DBADA /* CMakeLists.txt in Resources */,
