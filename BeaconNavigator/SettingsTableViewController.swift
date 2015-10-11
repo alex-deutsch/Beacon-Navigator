@@ -12,6 +12,7 @@ let BeaconSettingsLocationMethod = "BeaconSettingsLocationMethod"
 let BeaconSettingsDistanceType = "BeaconSettingsDistanceType"
 let BeaconSettingsBeaconNumber = "BeaconSettingsBeaconNumber"
 let BeaconSettingsBeaconDistance = "BeaconSettingsBeaconDistance"
+let BeaconSettingsBeaconRSSI = "BeaconSettingsBeaconRSSI"
 
 class SettingsTableViewController: UITableViewController {
 
@@ -33,7 +34,7 @@ class SettingsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,11 +44,13 @@ class SettingsTableViewController: UITableViewController {
         case 0:
             return 3
         case 1:
-            return 2
+            return 4
         case 2:
             return 7
         case 3:
             return 3
+        case 4:
+            return 2
         default:
             return 0
         }
@@ -64,9 +67,9 @@ class SettingsTableViewController: UITableViewController {
             case 0:
                 cell.textLabel?.text = "Trilateration"
             case 1:
-                cell.textLabel?.text = "Trilateration 2"
+                cell.textLabel?.text = "Least Squares (LSQ)"
             case 2:
-                cell.textLabel?.text = "Least Squares"
+                cell.textLabel?.text = "Non Linear Least Squares (NLSQ)"
             default:
                 break
             }
@@ -76,7 +79,11 @@ class SettingsTableViewController: UITableViewController {
             case 0:
                 cell.textLabel?.text = "Beacon Accuracy"
             case 1:
-                cell.textLabel?.text = "Accuracy calculated by RSSI"
+                cell.textLabel?.text = "Accuracy calculated by Log-Normal Path Distance Model"
+            case 2:
+                cell.textLabel?.text = "Accuracy calculated by RSSI Curve Fitting"
+            case 3:
+                cell.textLabel?.text = "Accuracy calculated by Third Party"
             default:
                 break
             }
@@ -113,6 +120,16 @@ class SettingsTableViewController: UITableViewController {
                 break
             }
             cell.accessoryType = NSUserDefaults.standardUserDefaults().integerForKey(BeaconSettingsBeaconDistance) == indexPath.row ? .Checkmark : .None
+        case 4:
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = "Standard RSSI"
+            case 1:
+                cell.textLabel?.text = "Flattened RSSI"
+            default:
+                break
+            }
+            cell.accessoryType = NSUserDefaults.standardUserDefaults().integerForKey(BeaconSettingsBeaconRSSI) == indexPath.row ? .Checkmark : .None
         default:
             break
         }
@@ -133,6 +150,8 @@ class SettingsTableViewController: UITableViewController {
             NSUserDefaults.standardUserDefaults().setInteger(indexPath.row, forKey: BeaconSettingsBeaconNumber)
         case 3:
             NSUserDefaults.standardUserDefaults().setInteger(indexPath.row, forKey: BeaconSettingsBeaconDistance)
+        case 4:
+            NSUserDefaults.standardUserDefaults().setInteger(indexPath.row, forKey: BeaconSettingsBeaconRSSI)
         default:
             break
         }
@@ -149,6 +168,8 @@ class SettingsTableViewController: UITableViewController {
             return "Number Of Beacons"
         case 3:
             return "Range of Beacons"
+        case 4:
+            return "Beacon RSSI"
         default:
             break
         }

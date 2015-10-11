@@ -41,4 +41,12 @@ class BeaconViewController : UIViewController {
         super.viewWillDisappear(animated)
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "beaconToRSSI" {
+            if let viewController = segue.destinationViewController as? RSSICalibratorViewController {
+                viewController.beacon = beacon
+            }
+        }
+    }
 }       

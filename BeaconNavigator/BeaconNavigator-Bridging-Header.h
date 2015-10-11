@@ -3,5 +3,5 @@
 //
 
 #include "EquationSolv.m"
-#import "NonLinear.h"
+#import "BeaconCalculus.h"
 #import "Trilateration.h"

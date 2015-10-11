@@ -15,14 +15,9 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         BeaconManager.sharedInstance
+        self.title = "Beacon Navigator"
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "main2beaconList" {
-//            if let viewController = segue.destinationViewController as? BeaconTableViewController {
-//            }
-//        }
-    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 

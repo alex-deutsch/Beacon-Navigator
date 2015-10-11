@@ -41,7 +41,7 @@ class BeaconMapPDFCreator : NSObject, UIDocumentInteractionControllerDelegate {
         setupPDFDocument()
         beginPage()
         addView(mapView, atPoint: CGPointZero)
-        let loggedPositionTextFrame = addText(loggedPositionsString, atPoint: CGPointMake(0, mapView.frame.height), color: .blackColor())
+        let loggedPositionTextFrame = addText(loggedPositionsString, atPoint: CGPointMake(0, mapView.frame.height + 20), color: .blackColor())
         let currentPositionTextFrame = addText(currentPositionsString, atPoint: CGPointMake(0, loggedPositionTextFrame.height + loggedPositionTextFrame.origin.y), color: positionPointColor)
         addText(userPositionsString, atPoint: CGPointMake(0, currentPositionTextFrame.height + currentPositionTextFrame.origin.y),color: userDefpositionPointColor)
         

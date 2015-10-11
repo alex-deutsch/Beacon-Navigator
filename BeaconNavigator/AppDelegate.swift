@@ -20,6 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         Fabric.with([Crashlytics.self()])
+        
+        var testArray : [NSNumber:NSNumber] = [:]
+        testArray[1] = 0
+        testArray[2] = 3
+        testArray[3] = 5
+        
+        BeaconCalculus.curveFitting(testArray)
         return true
     }
 
