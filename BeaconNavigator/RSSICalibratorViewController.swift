@@ -9,9 +9,6 @@
 import UIKit
 import CoreLocation
 
-let ReferenceDistance : Float = 1
-let RSSIAtReferenceDistance : Int = -59
-
 
 class RSSICalibratorViewController: UIViewController {
     

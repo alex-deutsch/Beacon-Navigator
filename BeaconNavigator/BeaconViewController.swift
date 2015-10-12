@@ -13,6 +13,7 @@ class BeaconViewController : UIViewController {
     
     @IBOutlet var beaconNameLabel : UILabel!
     @IBOutlet var beaconAccuracyLabel : UILabel!
+    @IBOutlet var beaconAccuracyLabel2 : UILabel!
     @IBOutlet var beaconRSSILabel : UILabel!
     var beacon : CLBeacon?
     
@@ -30,7 +31,8 @@ class BeaconViewController : UIViewController {
             for currentBeacon in beacons {
                 if currentBeacon.minor == beacon?.minor {
                     self.beacon = currentBeacon
-                    beaconAccuracyLabel.text = "Distance: \(self.beacon!.getDistance()) m"
+                    beaconAccuracyLabel.text = "Distance CL: \(self.beacon!.accuracy) m"
+                    beaconAccuracyLabel2.text = "Distance LN: \(self.beacon!.getAccuracyCalculatedByUsingLogNormal()) m"
                     beaconRSSILabel.text = "RSSI: \(self.beacon?.rssi) db"
                 }
             }

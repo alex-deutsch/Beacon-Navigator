@@ -716,8 +716,6 @@
 				FA66F0841B27A11200930851 /* BeaconLocationController.swift */,
 				FAB087E61B559378000DBADA /* BeaconCalculus.h */,
 				FAB087E71B559378000DBADA /* BeaconCalculus.mm */,
-				FAB0867A1B559378000DBADA /* NonLinear */,
-				FAB088611B559378000DBADA /* Trilateration */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -730,7 +728,8 @@
 				FAB087E51B559378000DBADA /* LevenbergMarquardt.h */,
 				FAB087E81B559378000DBADA /* unsupported */,
 			);
-			path = NonLinear;
+			name = NonLinear;
+			path = Location/NonLinear;
 			sourceTree = "<group>";
 		};
 		FAB0867B1B559378000DBADA /* Eigen */ = {
@@ -1619,7 +1618,8 @@
 				FAB088621B559378000DBADA /* Trilateration.h */,
 				FAB088631B559378000DBADA /* Trilateration.m */,
 			);
-			path = Trilateration;
+			name = Trilateration;
+			path = Location/Trilateration;
 			sourceTree = "<group>";
 		};
 		FACAC2751B3B034400C41B41 /* Extension */ = {
@@ -1671,6 +1671,8 @@
 		FAF91DB51B0A3A8F0002278C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FAB0867A1B559378000DBADA /* NonLinear */,
+				FAB088611B559378000DBADA /* Trilateration */,
 				FAD916711BA18C4200F00770 /* Fabric.framework */,
 				FAD916721BA18C4200F00770 /* Crashlytics.framework */,
 				FAB086691B5529A4000DBADA /* Accelerate.framework */,

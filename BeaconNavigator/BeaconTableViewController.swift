@@ -25,7 +25,7 @@ class BeaconTableViewController: UITableViewController, CLLocationManagerDelegat
         
         cell.imageView?.image = UIImage(named: "beacon_blue")
         cell.textLabel?.text = "Major: \(beacon.major) Minor: \(beacon.minor)"
-        cell.detailTextLabel?.text = "Accuracy: \(beacon.accuracy) CAccuracy: \(beacon.getAccuracyCalculatedByRSSIFittingCurve()), RSSI: \(beacon.rssi)"
+        cell.detailTextLabel?.text = "Accuracy: \(beacon.accuracy) CAccuracy: \(beacon.getAccuracyCalculatedByUsingLogNormal()), RSSI: \(beacon.rssi)"
         
         return cell
     }

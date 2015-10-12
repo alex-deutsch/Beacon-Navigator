@@ -21,9 +21,7 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate, BeaconMa
     var trackPositions = false {
         didSet {
             if trackPositions == false {
-                trackedPositions.removeAll(keepCapacity: false)
-                distanceMin = 1000
-                distanceMax = 0
+                resetTracking()
             }
         }
     }
@@ -136,6 +134,9 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate, BeaconMa
                         }
                     }
                 })
+                
+                // print logs
+                printAccuracyComparison()
             }
             
         }
@@ -161,7 +162,7 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate, BeaconMa
         }
         
         // Reset tracked Points
-        trackedPositions.removeAll(keepCapacity: false)
+        resetTracking()
     }
     
     @IBAction func rightBarButtonItemClicked() {
@@ -180,11 +181,23 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate, BeaconMa
     
     // internal funcs
     
+
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch = touches.first
+        if #available(iOS 9.0, *) {
+            NSLog("touch force: \(touch?.force)")
+            if touch?.force > 3 {
+                self.performSegueWithIdentifier("map2Settings", sender: self)
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
     internal func calculateDeviation() {
         deviation = 0
-        
 
-        
         guard let userPosition = self.beaconMapView.userdefinedPosition else { return }
         for var i = 1; i <= trackedPositions.count; i++ {
             let distance = trackedPositions[i-1].distanceToPoint(userPosition)
@@ -197,19 +210,23 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate, BeaconMa
             }
         }
         deviation /= CGFloat(trackedPositions.count)
-
+        
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touch = touches.first
-        if #available(iOS 9.0, *) {
-            NSLog("touch force: \(touch?.force)")
-            if touch?.force > 3 {
-                self.performSegueWithIdentifier("map2Settings", sender: self)
-            }
-        } else {
-            // Fallback on earlier versions
+    func printAccuracyComparison() {
+        for beacon in BeaconManager.sharedInstance.currentAvailableBeacons {
+            guard let beaconMap = beaconMap, let userPos = beaconMapView.userdefinedPosition, let beaconCoord = beaconMap.coordinateForBeacon(beacon) else { break }
+            let distance = BeaconLocationController.sharedInstance.DistanceBetweenPoints(beaconCoord, pointB: userPos)
+            print(String.localizedStringWithFormat("Minor: \(beacon.minor) Distance %.2f DistanceAcc %.2f DistanceLogN %.2f \n", Double(distance), Double(beacon.accuracy), Double(beacon.getAccuracyCalculatedByUsingLogNormal())))
         }
+        
+    }
+    
+    func resetTracking() {
+        trackedPositions.removeAll(keepCapacity: false)
+        deviation = 0
+        distanceMin = 1000
+        distanceMax = 0
     }
     
     func toggleBeacon(beacon: Int) {

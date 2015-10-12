@@ -73,7 +73,7 @@ class BeaconLocationController {
             return
         }
         else {
-            guard let threeClosestBeacons : [CLBeacon] = [beacons[0],beacons[1],beacons[2]] else { return }
+            guard let threeClosestBeacons : [CLBeacon] = [usableBeacons[0],usableBeacons[1],usableBeacons[2]] else { return }
             
             // Multilateration
             
@@ -203,6 +203,8 @@ class BeaconLocationController {
         return nil
     }
     
+    // helpers
+    
     /*
     *
     - Param point : the point to be adjusted
@@ -264,4 +266,7 @@ class BeaconLocationController {
         return value * value
     }
     
+    func DistanceBetweenPoints(pointA : CGPoint, pointB : CGPoint) -> CGFloat {
+        return sqrt(pow(pointA.x - pointB.x) + pow(pointA.y - pointB.y))
+    }
 }
