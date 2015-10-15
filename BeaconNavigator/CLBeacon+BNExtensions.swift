@@ -16,7 +16,7 @@ let ENVVARNKEY2 = "EnvVarN2"
 let RSSIVALUES = "RSSIVALUES"
 
 let ReferenceDistance : Float = 1
-let RSSIAtReferenceDistance : Int = -59
+let RSSIAtReferenceDistance : Int = -55
 
 var rssiValuesForBeacon: [CLBeacon: [Int]] = [:]
 
@@ -43,8 +43,8 @@ extension CLBeacon {
             return -1.0; // if we cannot determine accuracy, return -1.
         }
         let storedN = NSUserDefaults.standardUserDefaults().floatForKey(keyForEnvVar(ENVVARNKEY))
-        let n : Float = storedN > 0 ? storedN : 1.6
-        
+        //let n : Float = storedN > 0 ? storedN : 1.8
+        let n : Float = 2.1
         let distance = ReferenceDistance * exp((Float(RSSIAtReferenceDistance) - Float(self.rssi) - 4) / (10 * n))
         return CGFloat(distance)
     }

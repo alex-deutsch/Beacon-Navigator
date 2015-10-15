@@ -243,6 +243,27 @@
 			<key>y</key>
 			<integer>13</integer>
 		</dict>
+		<key>3791</key>
+		<dict>
+			<key>x</key>
+			<real>4.88</real>
+			<key>y</key>
+			<real>3.3</real>
+		</dict>
+		<key>1509</key>
+		<dict>
+			<key>x</key>
+			<real>8.42</real>
+			<key>y</key>
+			<real>3.3</real>
+		</dict>
+		<key>17382</key>
+		<dict>
+			<key>x</key>
+			<real>4.88</real>
+			<key>y</key>
+			<integer>0</integer>
+		</dict>
 	</dict>
 </dict>
 </plist>

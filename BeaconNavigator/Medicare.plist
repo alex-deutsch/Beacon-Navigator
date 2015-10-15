@@ -66,6 +66,34 @@
 			<key>y</key>
 			<real>12.7</real>
 		</dict>
+		<key>3791</key>
+		<dict>
+			<key>x</key>
+			<integer>0</integer>
+			<key>y</key>
+			<integer>10</integer>
+		</dict>
+		<key>1509</key>
+		<dict>
+			<key>x</key>
+			<integer>10</integer>
+			<key>y</key>
+			<integer>0</integer>
+		</dict>
+		<key>17382</key>
+		<dict>
+			<key>x</key>
+			<integer>10</integer>
+			<key>y</key>
+			<real>21.3</real>
+		</dict>
+		<key>35378</key>
+		<dict>
+			<key>x</key>
+			<real>19.3</real>
+			<key>y</key>
+			<integer>10</integer>
+		</dict>
 	</dict>
 </dict>
 </plist>
