@@ -25,13 +25,13 @@ class ViewController: UITableViewController {
         switch indexPath.section {
         case 0:
             cell.imageView?.image = UIImage(named: "icon_map")
-            cell.textLabel?.text = "Navigation Maps"
+            cell.textLabel?.text = "Indoor Navigation"
         case 1:
             cell.imageView?.image = UIImage(named: "beacon_blue")
-            cell.textLabel?.text = "Beacon List"
+            cell.textLabel?.text = "Beacon Liste"
         case 2:
             cell.imageView?.image = UIImage(named: "icon_settings")
-            cell.textLabel?.text = "Settings"
+            cell.textLabel?.text = "Einstellungen"
         default:
             break
         }
