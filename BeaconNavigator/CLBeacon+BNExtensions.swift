@@ -43,7 +43,7 @@ extension CLBeacon {
             return -1.0; // if we cannot determine accuracy, return -1.
         }
         let storedN = NSUserDefaults.standardUserDefaults().floatForKey(keyForEnvVar(ENVVARNKEY))
-        let n : Float = storedN > 0 ? storedN : 1.6
+        let n : Float = storedN > 0 ? storedN : 1.4
         
         let distance = ReferenceDistance * exp((Float(RSSIAtReferenceDistance) - Float(self.rssi) - 4) / (10 * n))
         return CGFloat(distance)
