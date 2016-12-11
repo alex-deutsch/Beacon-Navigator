@@ -21,7 +21,7 @@ extension CGPoint {
     @return distance between given points
     *
     */
-    func distanceToPoint(otherPoint : CGPoint) -> CGFloat {
+    func distanceToPoint(_ otherPoint : CGPoint) -> CGFloat {
         let value = pow(otherPoint.x - self.x, 2) + pow(otherPoint.y - self.y, 2)
         let value2 = fabsf(Float(value))
         let value3 = sqrt(value2)

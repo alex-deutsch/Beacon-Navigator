@@ -8,6 +8,30 @@
 
 import Foundation
 import CoreLocation
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 let ENVVARNKEY = "EnvVarN"
 let ENVVARNKEY0 = "EnvVarN0"
@@ -23,7 +47,7 @@ var rssiValuesForBeacon: [CLBeacon: [Int]] = [:]
 extension CLBeacon {
     
     func getDistance() -> CGFloat {
-        let distanceType = NSUserDefaults.standardUserDefaults().integerForKey(BeaconSettingsDistanceType)
+        let distanceType = UserDefaults.standard.integer(forKey: BeaconSettingsDistanceType)
         switch distanceType {
         case 0:
             return CGFloat(accuracy)
@@ -42,7 +66,7 @@ extension CLBeacon {
         if rssi == 0 {
             return -1.0; // if we cannot determine accuracy, return -1.
         }
-        let storedN = NSUserDefaults.standardUserDefaults().floatForKey(keyForEnvVar(ENVVARNKEY))
+        let storedN = UserDefaults.standard.float(forKey: keyForEnvVar(ENVVARNKEY))
         let n : Float = storedN > 0 ? storedN : 1.4
         
         let distance = ReferenceDistance * exp((Float(RSSIAtReferenceDistance) - Float(self.rssi) - 4) / (10 * n))
@@ -53,9 +77,9 @@ extension CLBeacon {
         if rssi == 0 {
             return -1.0; // if we cannot determine accuracy, return -1.
         }
-        let a0 = NSUserDefaults.standardUserDefaults().floatForKey(ENVVARNKEY0)
-        let a1 = NSUserDefaults.standardUserDefaults().floatForKey(ENVVARNKEY1)
-        let a2 = NSUserDefaults.standardUserDefaults().floatForKey(ENVVARNKEY2)
+        let a0 = UserDefaults.standard.float(forKey: ENVVARNKEY0)
+        let a1 = UserDefaults.standard.float(forKey: ENVVARNKEY1)
+        let a2 = UserDefaults.standard.float(forKey: ENVVARNKEY2)
         
         let distance = a2 * Float(rssi * rssi) + a1 * Float(rssi) + a0
         return CGFloat(distance)
@@ -97,7 +121,7 @@ extension CLBeacon {
         return middleValue / rssiValuesForBeacon[self]!.count
     }
     
-    func keyForEnvVar(envVar : String) -> String {
+    func keyForEnvVar(_ envVar : String) -> String {
         return ("\(envVar)\(self.major)\(self.minor)")
     }
 }

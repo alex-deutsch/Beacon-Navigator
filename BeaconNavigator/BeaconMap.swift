@@ -15,20 +15,20 @@ class BeaconMap {
     
     let name : String
     var edgeCoordinates : [CGPoint] = []
-    var maxPoint = CGPointZero
+    var maxPoint = CGPoint.zero
     
     // Beacon Minor Value(Int) : Point(CGPoint)
-    private var beaconCoordinates : [Int : CGPoint] = [:]
+    fileprivate var beaconCoordinates : [Int : CGPoint] = [:]
     
     required init(fileName : String) {
-        if  let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "plist"),
+        if  let path = Bundle.main.path(forResource: fileName, ofType: "plist"),
             let dictionary = NSDictionary(contentsOfFile: path),
             let beacons = dictionary["beacons"] as? Dictionary<String,Dictionary<String,NSNumber>>,
             let edges = dictionary["edges"] as? Array<Dictionary<String,NSNumber>> {
             
                 // Read Edges
                 for edge in edges {
-                    let edgePoint = CGPointMake(CGFloat(edge["x"]!.floatValue), CGFloat(edge["y"]!.floatValue))
+                    let edgePoint = CGPoint(x: CGFloat(edge["x"]!.floatValue), y: CGFloat(edge["y"]!.floatValue))
                     edgeCoordinates.append(edgePoint)
                     
                     // Set Max Point
@@ -58,8 +58,8 @@ class BeaconMap {
     @param beacon the beacon to be mapped
     @return the matching point in the map of the beacon, nil if the beacon was not found on the map
     */
-    func coordinateForBeacon(beacon : CLBeacon) -> CGPoint? {
-        let minorValue = beacon.minor.integerValue
+    func coordinateForBeacon(_ beacon : CLBeacon) -> CGPoint? {
+        let minorValue = beacon.minor.intValue
         let coordinate = beaconCoordinates[minorValue]
         return coordinate
     }
@@ -68,7 +68,7 @@ class BeaconMap {
     @param beacons an array of beacons to map with points
     @return dictionary of beacons and corresponding points
     */
-    func beaconCoordinatesForBeacons(beacons : [CLBeacon]) -> [CLBeacon:CGPoint] {
+    func beaconCoordinatesForBeacons(_ beacons : [CLBeacon]) -> [CLBeacon:CGPoint] {
         var beaconCoordinates : [CLBeacon:CGPoint] = [:]
         for beacon in beacons {
             if let coordinate = coordinateForBeacon(beacon) {
@@ -81,7 +81,7 @@ class BeaconMap {
     /* Check if that beacon is on that map 
     @return boolean value if the beacon positioned on in this map
     */
-    func beaconIsOnMap(beacon : CLBeacon) -> Bool {
-        return beaconCoordinates.keys.contains(beacon.minor.integerValue)
+    func beaconIsOnMap(_ beacon : CLBeacon) -> Bool {
+        return beaconCoordinates.keys.contains(beacon.minor.intValue)
     }
 }

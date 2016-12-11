@@ -11,11 +11,11 @@ import UIKit
 
 class BeaconMapPDFCreator : NSObject, UIDocumentInteractionControllerDelegate {
     
-    var pageSize = CGSizeZero
+    var pageSize = CGSize.zero
     let name : String
     var pageFont : UIFont {
         get {
-            return UIFont.systemFontOfSize(10.0)
+            return UIFont.systemFont(ofSize: 10.0)
         }
     }
 
@@ -24,10 +24,10 @@ class BeaconMapPDFCreator : NSObject, UIDocumentInteractionControllerDelegate {
     var pdfPath : String {
         get {
             let pdfName = "\(name).pdf"
-            let paths = NSSearchPathForDirectoriesInDomains(.LibraryDirectory, .UserDomainMask, true)
-            let documentsDirectory: AnyObject = paths[0]
-            let pdfPath = documentsDirectory.stringByAppendingPathComponent(pdfName)
-            return pdfPath
+            let paths = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)
+            let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let pdfPath = documentsDirectory.appendingPathComponent(pdfName)
+            return ""
         }
     }
     
@@ -36,54 +36,54 @@ class BeaconMapPDFCreator : NSObject, UIDocumentInteractionControllerDelegate {
     }
     
     func generatePDF(mapView: BeaconMapView, loggedPositionsString : String, currentPositionsString : String, userPositionsString : String) {
-        let calculatedHeight = mapView.frame.height + heightForView(loggedPositionsString) + heightForView(currentPositionsString) + heightForView(userPositionsString) + 200
-        pageSize = CGSizeMake(mapView.frame.width, calculatedHeight)
+        let calculatedHeight = mapView.frame.height + heightForView(text: loggedPositionsString) + heightForView(text: currentPositionsString) + heightForView(text: userPositionsString) + 200
+        pageSize = CGSize(width: mapView.frame.width, height: calculatedHeight)
         setupPDFDocument()
         beginPage()
-        addView(mapView, atPoint: CGPointZero)
-        let loggedPositionTextFrame = addText(loggedPositionsString, atPoint: CGPointMake(0, mapView.frame.height + 20), color: .blackColor())
-        let currentPositionTextFrame = addText(currentPositionsString, atPoint: CGPointMake(0, loggedPositionTextFrame.height + loggedPositionTextFrame.origin.y), color: positionPointColor)
-        addText(userPositionsString, atPoint: CGPointMake(0, currentPositionTextFrame.height + currentPositionTextFrame.origin.y),color: userDefpositionPointColor)
+        addView(view: mapView, atPoint: CGPoint.zero)
+        let loggedPositionTextFrame = addText(text: loggedPositionsString, atPoint: CGPoint(x: 0, y: mapView.frame.height + 20), withColor: .black)
+        let currentPositionTextFrame = addText(text: currentPositionsString, atPoint: CGPoint(x: 0, y: loggedPositionTextFrame.height + loggedPositionTextFrame.origin.y), withColor: positionPointColor)
+        addText(text: userPositionsString, atPoint: CGPoint(x: 0, y: currentPositionTextFrame.height + currentPositionTextFrame.origin.y),withColor: userDefpositionPointColor)
         
         finishPDF()
     }
     
     func setupPDFDocument() {
-        UIGraphicsBeginPDFContextToFile(pdfPath, CGRectZero, nil)
+        UIGraphicsBeginPDFContextToFile(pdfPath, CGRect.zero, nil)
     }
     
     func beginPage() {
-        UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, pageSize.width, pageSize.height), nil)
+        UIGraphicsBeginPDFPageWithInfo(CGRect(x: 0, y: 0, width: pageSize.width, height: pageSize.height), nil)
     }
     
-    func addText(text : String, atPoint point : CGPoint, color: UIColor) -> CGRect {
-        let stringSize = CGSizeMake(pageSize.width, heightForView(text))
-        let renderingRect = CGRectMake(point.x, point.y, pageSize.width, stringSize.height)
+    func addText(text : String, atPoint point : CGPoint, withColor color: UIColor) -> CGRect {
+        let stringSize = CGSize(width: pageSize.width, height: heightForView(text: text))
+        let renderingRect = CGRect(x: point.x, y: point.y, width: pageSize.width, height: stringSize.height)
         let textFontAttributes = [
             NSFontAttributeName: pageFont,
             NSForegroundColorAttributeName: color
         ]
 
-        (text as NSString).drawInRect(renderingRect, withAttributes: textFontAttributes)
+        (text as NSString).draw(in: renderingRect, withAttributes: textFontAttributes)
         return renderingRect
     }
     
     func addImage(image : UIImage, atPoint point : CGPoint) -> CGRect {
-        let renderingFrame = CGRectMake(point.x, point.y, image.size.width, image.size.height)
-        image.drawInRect(renderingFrame)
+        let renderingFrame = CGRect(x: point.x,y: point.y, width: image.size.width, height: image.size.height)
+        image.draw(in: renderingFrame)
         return renderingFrame
     }
     
     func addView(view : UIView, atPoint point : CGPoint) -> CGRect {
         let context = UIGraphicsGetCurrentContext()
-        view.layer.renderInContext(context!)
+        view.layer.render(in: context!)
         return view.frame
     }
     
-    func heightForView(text:String) -> CGFloat{
-        let label:UILabel = UILabel(frame: CGRectMake(0, 0, pageSize.width, CGFloat.max))
+    func heightForView(text: String) -> CGFloat{
+        let label:UILabel = UILabel(frame: CGRect(x: 0,y: 0, width: pageSize.width, height: CGFloat.greatestFiniteMagnitude))
         label.numberOfLines = 0
-        label.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.font = pageFont
         label.text = text
         
@@ -99,9 +99,9 @@ class BeaconMapPDFCreator : NSObject, UIDocumentInteractionControllerDelegate {
         baseViewControllerForPreview = baseViewController
         let documentInteractionVC = UIDocumentInteractionController()
         let pdfURL = NSURL(fileURLWithPath: pdfPath)
-        documentInteractionVC.URL = pdfURL
+        documentInteractionVC.url = pdfURL as URL
         documentInteractionVC.delegate = self
-        documentInteractionVC.presentPreviewAnimated(true)
+        documentInteractionVC.presentPreview(animated: true)
         
     }
     func documentInteractionControllerViewControllerForPreview(controller: UIDocumentInteractionController) -> UIViewController {

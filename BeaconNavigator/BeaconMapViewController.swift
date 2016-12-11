@@ -8,6 +8,30 @@
 
 import UIKit
 import CoreLocation
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class BeaconMapViewController : UIViewController, UIScrollViewDelegate, BeaconMapViewDelegate {
     
@@ -57,14 +81,14 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate, BeaconMa
         positionLabel.textColor = positionPointColor
         beaconMapView.delegate = self
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.title = beaconMap?.name
         
         // Register for Beacon updates
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didUpdateBeacons:", name: BeaconManagerDidUpdateAvailableBeacons, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "mapViewDidUpdateUserDefinedPosition:", name: UserDefinedPositionSetNotification, object: beaconMapView)
+        NotificationCenter.default.addObserver(self, selector: #selector(BeaconMapViewController.didUpdateBeacons(_:)), name: NSNotification.Name(rawValue: BeaconManagerDidUpdateAvailableBeacons), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(BeaconMapViewController.mapViewDidUpdateUserDefinedPosition(_:)), name: NSNotification.Name(rawValue: UserDefinedPositionSetNotification), object: beaconMapView)
         
         // Set Beacon Map Size to draw it
         if let beaconMap = beaconMap {
@@ -76,17 +100,17 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate, BeaconMa
         
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     
-    func didUpdateBeacons(notification : NSNotification) {
+    func didUpdateBeacons(_ notification : Notification) {
         
         if let beacons = notification.userInfo!["beacons"] as? [CLBeacon] {
             
-            let enabledBeacons = beacons.filter { return !beaconMapView.disabledBeacons.contains($0.minor.integerValue) }
+            let enabledBeacons = beacons.filter { return !beaconMapView.disabledBeacons.contains($0.minor.intValue) }
             
             
             // Update map with available Beacons
@@ -98,11 +122,11 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate, BeaconMa
                 // Try to map all Beacons to the map
                 var beaconMinorPosition : [Int:CGPoint] = [:]
                 for beacon in beacons {
-                    beaconMinorPosition[beacon.minor.integerValue] = beaconMap.coordinateForBeacon(beacon)
+                    beaconMinorPosition[beacon.minor.intValue] = beaconMap.coordinateForBeacon(beacon)
                     
                     // Apply a distance for the beacon if there is a useful one
                     if beacon.getDistance() > 0 {
-                        beaconMapView.beaconDistances[beacon.minor.integerValue] = CGFloat(beacon.getDistance())
+                        beaconMapView.beaconDistances[beacon.minor.intValue] = CGFloat(beacon.getDistance())
                     }
                 }
                 
@@ -110,7 +134,7 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate, BeaconMa
                 beaconMapView.beaconPoints = beaconMinorPosition
                 
                 // Calculate Position
-                let locationMethod : LocationMethod = LocationMethod(rawValue: NSUserDefaults.standardUserDefaults().integerForKey(BeaconSettingsLocationMethod))!
+                let locationMethod : LocationMethod = LocationMethod(rawValue: UserDefaults.standard.integer(forKey: BeaconSettingsLocationMethod))!
                 BeaconLocationController.sharedInstance.locateUsingBeacons(enabledBeacons,usingBeaconMap: beaconMap, locationMethod : locationMethod, completionBlock: { (error, coordinates, usedBeacons) -> Void in
                     if let error = error {
                         NSLog("Error Trilaterating: \(error.localizedDescription)")
@@ -120,10 +144,10 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate, BeaconMa
                             // Don't update Zero Coordinates
                             return
                         }
-                        let positionPoint = CGPointMake(coordinates.x, coordinates.y)
+                        let positionPoint = CGPoint(x: coordinates.x, y: coordinates.y)
                         //NSLog("received current position: \(positionPoint)")
                         self.beaconMapView.currentPosition = positionPoint
-                        self.beaconMapView.usedBeacons = usedBeacons.map { $0.minor.integerValue }
+                        self.beaconMapView.usedBeacons = usedBeacons.map { $0.minor.intValue }
                         
                         // update label
                         self.positionLabel.text = String.localizedStringWithFormat("calc Pos: \(positionPoint.formatedString())")
@@ -145,18 +169,18 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate, BeaconMa
     // Mark: UIScrollViewDelegate
     
     // TODO: Adjust beaconMapView to be sharper after zoom
-    func scrollViewDidZoom(scrollView: UIScrollView) {
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
         //NSLog("scrollView.contentScaleFactor \(scrollView.contentScaleFactor)")
         //beaconMapView.frame = CGRectMake(0, 0, 320 * scrollView.zoomScale, 400 * scrollView.zoomScale)
     }
     
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         //beaconMapView.frame = CGRectMake(0, 0, 320 * scrollView.zoomScale, 400 * scrollView.zoomScale)
         return beaconMapView
     }
     
     // Notifications
-    func mapViewDidUpdateUserDefinedPosition(notification : NSNotification) {
+    func mapViewDidUpdateUserDefinedPosition(_ notification : Notification) {
         if let position = beaconMapView.userdefinedPosition {
             userdefinedPositionLabel.text = String.localizedStringWithFormat("userDef P: \(position.formatedString())")
         }
@@ -173,8 +197,8 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate, BeaconMa
     @IBAction func generatePDFClicked() {
         if let beaconName = beaconMap?.name {
             let pdfManager = BeaconMapPDFCreator(name: beaconName)
-            pdfManager.generatePDF(beaconMapView, loggedPositionsString: devationLabel.text!, currentPositionsString: positionLabel.text!, userPositionsString: userdefinedPositionLabel.text!)
-            pdfManager.openPDF(self)
+            pdfManager.generatePDF(mapView: beaconMapView, loggedPositionsString: devationLabel.text!, currentPositionsString: positionLabel.text!, userPositionsString: userdefinedPositionLabel.text!)
+            pdfManager.openPDF(baseViewController: self)
         }
     }
     
@@ -183,12 +207,12 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate, BeaconMa
     
 
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         if #available(iOS 9.0, *) {
             NSLog("touch force: \(touch?.force)")
             if touch?.force > 3 {
-                self.performSegueWithIdentifier("map2Settings", sender: self)
+                self.performSegue(withIdentifier: "map2Settings", sender: self)
             }
         } else {
             // Fallback on earlier versions
@@ -199,8 +223,8 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate, BeaconMa
         deviation = 0
 
         guard let userPosition = self.beaconMapView.userdefinedPosition else { return }
-        for var i = 1; i <= trackedPositions.count; i++ {
-            let distance = trackedPositions[i-1].distanceToPoint(userPosition)
+        for _ in 1..<trackedPositions.count+2 {
+            let distance = trackedPositions[N-1].distanceToPoint(userPosition)
             deviation += distance
             if distanceMin > distance {
                 distanceMin = distance
@@ -223,15 +247,15 @@ class BeaconMapViewController : UIViewController, UIScrollViewDelegate, BeaconMa
     }
     
     func resetTracking() {
-        trackedPositions.removeAll(keepCapacity: false)
+        trackedPositions.removeAll(keepingCapacity: false)
         deviation = 0
         distanceMin = 1000
         distanceMax = 0
     }
     
-    func toggleBeacon(beacon: Int) {
+    func toggleBeacon(_ beacon: Int) {
         if beaconMapView.disabledBeacons.contains(beacon) {
-            beaconMapView.disabledBeacons.removeAtIndex(beaconMapView.disabledBeacons.indexOf(beacon)!)
+            beaconMapView.disabledBeacons.remove(at: beaconMapView.disabledBeacons.index(of: beacon)!)
         }
         else {
             beaconMapView.disabledBeacons.append(beacon)

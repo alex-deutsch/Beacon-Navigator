@@ -17,15 +17,15 @@ class BeaconViewController : UIViewController {
     @IBOutlet var beaconRSSILabel : UILabel!
     var beacon : CLBeacon?
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didUpdateBeacons:", name: BeaconManagerDidUpdateAvailableBeacons, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(BeaconViewController.didUpdateBeacons(_:)), name: NSNotification.Name(rawValue: BeaconManagerDidUpdateAvailableBeacons), object: nil)
         if let beacon = beacon {
             beaconNameLabel.text = "Beacon Minor \(beacon.minor), Major: \(beacon.major)"
         }
     }
     
-    func didUpdateBeacons(notification : NSNotification) {
+    func didUpdateBeacons(_ notification : Notification) {
         
         if let beacons = notification.userInfo!["beacons"] as? [CLBeacon] {
             for currentBeacon in beacons {
@@ -39,14 +39,14 @@ class BeaconViewController : UIViewController {
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "beaconToRSSI" {
-            if let viewController = segue.destinationViewController as? RSSICalibratorViewController {
+            if let viewController = segue.destination as? RSSICalibratorViewController {
                 viewController.beacon = beacon
             }
         }

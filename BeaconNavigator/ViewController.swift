@@ -19,8 +19,8 @@ class ViewController: UITableViewController {
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) 
         
         switch indexPath.section {
         case 0:
@@ -39,24 +39,24 @@ class ViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            performSegueWithIdentifier("main2maps", sender: self)
+            performSegue(withIdentifier: "main2maps", sender: self)
         case 1:
-            performSegueWithIdentifier("main2beaconlist", sender: self)
+            performSegue(withIdentifier: "main2beaconlist", sender: self)
         case 2:
-            performSegueWithIdentifier("main2settings", sender: self)
+            performSegue(withIdentifier: "main2settings", sender: self)
         default:
             break
         }
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
 

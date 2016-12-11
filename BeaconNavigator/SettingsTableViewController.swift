@@ -33,11 +33,11 @@ class SettingsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 5
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         switch section {
@@ -57,8 +57,8 @@ class SettingsTableViewController: UITableViewController {
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) 
 
         // Configure the cell...
         switch indexPath.section {
@@ -73,7 +73,7 @@ class SettingsTableViewController: UITableViewController {
             default:
                 break
             }
-            cell.accessoryType = NSUserDefaults.standardUserDefaults().integerForKey(BeaconSettingsLocationMethod) == indexPath.row ? .Checkmark : .None
+            cell.accessoryType = UserDefaults.standard.integer(forKey: BeaconSettingsLocationMethod) == indexPath.row ? .checkmark : .none
         case 1:
             switch indexPath.row {
             case 0:
@@ -87,7 +87,7 @@ class SettingsTableViewController: UITableViewController {
             default:
                 break
             }
-            cell.accessoryType = NSUserDefaults.standardUserDefaults().integerForKey(BeaconSettingsDistanceType) == indexPath.row ? .Checkmark : .None
+            cell.accessoryType = UserDefaults.standard.integer(forKey: BeaconSettingsDistanceType) == indexPath.row ? .checkmark : .none
         case 2:
             switch indexPath.row {
             case 0:
@@ -107,7 +107,7 @@ class SettingsTableViewController: UITableViewController {
             default:
                 break
             }
-            cell.accessoryType = NSUserDefaults.standardUserDefaults().integerForKey(BeaconSettingsBeaconNumber) == indexPath.row ? .Checkmark : .None
+            cell.accessoryType = UserDefaults.standard.integer(forKey: BeaconSettingsBeaconNumber) == indexPath.row ? .checkmark : .none
         case 3:
             switch indexPath.row {
             case 0:
@@ -119,7 +119,7 @@ class SettingsTableViewController: UITableViewController {
             default:
                 break
             }
-            cell.accessoryType = NSUserDefaults.standardUserDefaults().integerForKey(BeaconSettingsBeaconDistance) == indexPath.row ? .Checkmark : .None
+            cell.accessoryType = UserDefaults.standard.integer(forKey: BeaconSettingsBeaconDistance) == indexPath.row ? .checkmark : .none
         case 4:
             switch indexPath.row {
             case 0:
@@ -129,7 +129,7 @@ class SettingsTableViewController: UITableViewController {
             default:
                 break
             }
-            cell.accessoryType = NSUserDefaults.standardUserDefaults().integerForKey(BeaconSettingsBeaconRSSI) == indexPath.row ? .Checkmark : .None
+            cell.accessoryType = UserDefaults.standard.integer(forKey: BeaconSettingsBeaconRSSI) == indexPath.row ? .checkmark : .none
         default:
             break
         }
@@ -138,27 +138,27 @@ class SettingsTableViewController: UITableViewController {
     }
 
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         NSLog("selected ROW: \(indexPath.row)")
         switch indexPath.section {
         case 0:
-            NSUserDefaults.standardUserDefaults().setInteger(indexPath.row, forKey: BeaconSettingsLocationMethod)
+            UserDefaults.standard.set(indexPath.row, forKey: BeaconSettingsLocationMethod)
         case 1:
-            NSUserDefaults.standardUserDefaults().setInteger(indexPath.row, forKey: BeaconSettingsDistanceType)
+            UserDefaults.standard.set(indexPath.row, forKey: BeaconSettingsDistanceType)
         case 2:
-            NSUserDefaults.standardUserDefaults().setInteger(indexPath.row, forKey: BeaconSettingsBeaconNumber)
+            UserDefaults.standard.set(indexPath.row, forKey: BeaconSettingsBeaconNumber)
         case 3:
-            NSUserDefaults.standardUserDefaults().setInteger(indexPath.row, forKey: BeaconSettingsBeaconDistance)
+            UserDefaults.standard.set(indexPath.row, forKey: BeaconSettingsBeaconDistance)
         case 4:
-            NSUserDefaults.standardUserDefaults().setInteger(indexPath.row, forKey: BeaconSettingsBeaconRSSI)
+            UserDefaults.standard.set(indexPath.row, forKey: BeaconSettingsBeaconRSSI)
         default:
             break
         }
         tableView.reloadData()
     }
 
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
             return "Location Method"

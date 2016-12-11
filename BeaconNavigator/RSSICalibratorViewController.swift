@@ -27,7 +27,7 @@ class RSSICalibratorViewController: UIViewController {
     @IBOutlet weak var currentDistance: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didUpdateBeacons:", name: BeaconManagerDidUpdateAvailableBeacons, object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector(("didUpdateBeacons:")), name: NSNotification.Name(rawValue: BeaconManagerDidUpdateAvailableBeacons), object: nil)
         // Do any additional setup after loading the view.
         currentDistance.text = "RSSI Reference Distance \(MeasureSlider.value) m"
     }
@@ -67,20 +67,20 @@ class RSSICalibratorViewController: UIViewController {
         
         guard let beacon = beacon else { return }
         
-        measureValuesN[MeasureSlider.value] = calculateN(ReferenceDistance, d: MeasureSlider.value, rssi0: RSSIAtReferenceDistance, rssiD: beacon.rssi)
-        measureValuesRSSI[MeasureSlider.value] = beacon.rssi
+        measureValuesN[MeasureSlider.value as NSNumber] = calculateN(d0: ReferenceDistance, d: MeasureSlider.value, rssi0: RSSIAtReferenceDistance, rssiD: beacon.rssi) as NSNumber?
+        measureValuesRSSI[MeasureSlider.value as NSNumber] = beacon.rssi as NSNumber?
     }
     @IBAction func calculateFinalN(sender: AnyObject) {
 
         guard let beacon = beacon else { return }
-        let n = leastSquareLinear(measureValuesN)
-        let values = BeaconCalculus.curveFitting(measureValuesRSSI)
+        let n = leastSquareLinear(values: measureValuesN)
+        guard let values = BeaconCalculus.curveFitting(measureValuesRSSI) as [AnyObject]? else { return }
         resultOfNValue.text = "Result N= \(n)"
         
-        NSUserDefaults.standardUserDefaults().setFloat(n, forKey: beacon.keyForEnvVar(ENVVARNKEY))
-        NSUserDefaults.standardUserDefaults().setFloat(values[0].floatValue, forKey: beacon.keyForEnvVar(ENVVARNKEY0))
-        NSUserDefaults.standardUserDefaults().setFloat(values[1].floatValue, forKey: beacon.keyForEnvVar(ENVVARNKEY1))
-        NSUserDefaults.standardUserDefaults().setFloat(values[2].floatValue, forKey: beacon.keyForEnvVar(ENVVARNKEY2))
+        UserDefaults.standard.set(n, forKey: beacon.keyForEnvVar(ENVVARNKEY))
+        UserDefaults.standard.set((values[0]).floatValue, forKey: beacon.keyForEnvVar(ENVVARNKEY0))
+        UserDefaults.standard.set((values[1]).floatValue, forKey: beacon.keyForEnvVar(ENVVARNKEY1))
+        UserDefaults.standard.set((values[2]).floatValue, forKey: beacon.keyForEnvVar(ENVVARNKEY2))
     }
 
 

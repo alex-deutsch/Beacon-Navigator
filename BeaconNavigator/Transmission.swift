@@ -11,12 +11,12 @@ import CoreLocation
 class Transmission : NSObject {
     
     var beacon : CLBeacon
-    var timestamp : NSDate
+    var timestamp : Date
     var distance : CGFloat
     
     required init(beacon : CLBeacon) {
         self.beacon = beacon
-        self.timestamp = NSDate()
+        self.timestamp = Date()
         self.distance = CGFloat(beacon.getDistance())
     }
 }

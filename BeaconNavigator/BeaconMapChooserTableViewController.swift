@@ -19,29 +19,29 @@ class BeaconMapChooserTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier) as UITableViewCell!
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier) as UITableViewCell!
         
         let map = maps[indexPath.row]
         
-        cell.textLabel?.text = map.name
-        cell.detailTextLabel?.text = ""
+        cell?.textLabel?.text = map.name
+        cell?.detailTextLabel?.text = ""
         
-        return cell
+        return cell!
     }
     
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return maps.count
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "mapChoose2Map" {
-            if let viewController = segue.destinationViewController as? BeaconMapViewController {
+            if let viewController = segue.destination as? BeaconMapViewController {
                 let map = maps[tableView.indexPathForSelectedRow!.row]
                 viewController.beaconMap = map
             }

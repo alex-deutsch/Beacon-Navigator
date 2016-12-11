@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		FA034C2E1B3C2BAD00355DFD /* BeaconMapPDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA034C2D1B3C2BAD00355DFD /* BeaconMapPDFCreator.swift */; };
 		FA1BF43E1B34727200C727ED /* Wohnung.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA1BF43D1B34727200C727ED /* Wohnung.plist */; };
-		FA233AAC1BC676950045A5CD /* RSSICalibratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA233AAB1BC676950045A5CD /* RSSICalibratorViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		FA233AAE1BCA891A0045A5CD /* BNBeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA233AAD1BCA891A0045A5CD /* BNBeacon.swift */; settings = {ASSET_TAGS = (); }; };
+		FA233AAC1BC676950045A5CD /* RSSICalibratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA233AAB1BC676950045A5CD /* RSSICalibratorViewController.swift */; };
+		FA233AAE1BCA891A0045A5CD /* BNBeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA233AAD1BCA891A0045A5CD /* BNBeacon.swift */; };
 		FA28FE521B2893E5004F2666 /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28FE511B2893E5004F2666 /* BeaconManager.swift */; };
 		FA28FE551B29D94C004F2666 /* BeaconMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28FE541B29D94C004F2666 /* BeaconMapView.swift */; };
 		FA28FE571B29DBC6004F2666 /* BeaconMapChooserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28FE561B29DBC6004F2666 /* BeaconMapChooserTableViewController.swift */; };
@@ -138,8 +138,6 @@
 		FAB088D81B55941D000DBADA /* Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB088D71B55941D000DBADA /* Transmission.swift */; };
 		FACAC2771B3B036300C41B41 /* CGPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACAC2761B3B036300C41B41 /* CGPoint+Extension.swift */; };
 		FACAC2791B3B064200C41B41 /* BeaconNavigatorDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACAC2781B3B064200C41B41 /* BeaconNavigatorDefines.swift */; };
-		FAD916731BA18C4200F00770 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD916711BA18C4200F00770 /* Fabric.framework */; };
-		FAD916741BA18C4200F00770 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD916721BA18C4200F00770 /* Crashlytics.framework */; };
 		FAF91DB81B0A3A8F0002278C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF91DB71B0A3A8F0002278C /* AppDelegate.swift */; };
 		FAF91DBB1B0A3A8F0002278C /* BeaconNavigator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAF91DB91B0A3A8F0002278C /* BeaconNavigator.xcdatamodeld */; };
 		FAF91DBD1B0A3A8F0002278C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF91DBC1B0A3A8F0002278C /* ViewController.swift */; };
@@ -616,8 +614,6 @@
 		FAB088D71B55941D000DBADA /* Transmission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transmission.swift; sourceTree = "<group>"; };
 		FACAC2761B3B036300C41B41 /* CGPoint+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extension.swift"; sourceTree = "<group>"; };
 		FACAC2781B3B064200C41B41 /* BeaconNavigatorDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconNavigatorDefines.swift; sourceTree = "<group>"; };
-		FAD916711BA18C4200F00770 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = ../Fabric.framework; sourceTree = "<group>"; };
-		FAD916721BA18C4200F00770 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = ../Crashlytics.framework; sourceTree = "<group>"; };
 		FAF91DB21B0A3A8F0002278C /* BeaconNavigator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaconNavigator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF91DB61B0A3A8F0002278C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAF91DB71B0A3A8F0002278C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -640,8 +636,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAB0866A1B5529A4000DBADA /* Accelerate.framework in Frameworks */,
-				FAD916741BA18C4200F00770 /* Crashlytics.framework in Frameworks */,
-				FAD916731BA18C4200F00770 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1673,8 +1667,6 @@
 			children = (
 				FAB0867A1B559378000DBADA /* NonLinear */,
 				FAB088611B559378000DBADA /* Trilateration */,
-				FAD916711BA18C4200F00770 /* Fabric.framework */,
-				FAD916721BA18C4200F00770 /* Crashlytics.framework */,
 				FAB086691B5529A4000DBADA /* Accelerate.framework */,
 				FAF91DB61B0A3A8F0002278C /* Info.plist */,
 				FAB0866B1B5540CA000DBADA /* BeaconNavigator-Bridging-Header.h */,
@@ -1746,15 +1738,17 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Alexander Deutsch";
 				TargetAttributes = {
 					FAF91DB11B0A3A8F0002278C = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = 97NL7NZ9K6;
+						LastSwiftMigration = 0810;
 					};
 					FAF91DC91B0A3A8F0002278C = {
 						CreatedOnToolsVersion = 6.3.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = FAF91DB11B0A3A8F0002278C;
 					};
 				};
@@ -1923,7 +1917,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 4961cf2e4635f7fffeb6dc2ed0692ef6280ad944 600cd5df5f83f520c4c0fce40036a52d4814c3197a47eb532d2ffb200d0d443e";
+			shellScript = "";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2010,8 +2004,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2056,8 +2052,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2076,6 +2074,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2098,6 +2097,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "BeaconNavigator/BeaconNavigator-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -2117,6 +2117,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "de.f1re.ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "BeaconNavigator/BeaconNavigator-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -2137,6 +2138,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.f1re.ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BeaconNavigator.app/BeaconNavigator";
 			};
 			name = Debug;
@@ -2154,6 +2156,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.f1re.ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BeaconNavigator.app/BeaconNavigator";
 			};
 			name = Release;
