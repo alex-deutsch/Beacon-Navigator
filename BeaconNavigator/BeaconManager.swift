@@ -13,14 +13,14 @@ let BeaconManagerDidUpdateAvailableBeacons = "beaconManagerDidUpdateAvailableBea
 
 class BeaconManager : NSObject, CLLocationManagerDelegate {
     
-    let region = CLBeaconRegion(proximityUUID: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!, identifier: "Estimotes")
+    static let region = CLBeaconRegion(proximityUUID: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!, identifier: "Estimotes")
     
     static let sharedInstance = BeaconManager()
     
-    let locationManager = CLLocationManager()
+    private let locationManager = CLLocationManager()
     
+    private var allKnownBeacons : [CLBeacon] = []
     var currentAvailableBeacons : [CLBeacon] = []
-    var allKnownBeacons : [CLBeacon] = []
     
     override init() {
         super.init()
@@ -30,9 +30,9 @@ class BeaconManager : NSObject, CLLocationManagerDelegate {
         }
         
         // Do any additional setup after loading the view, typically from a nib.
-        locationManager.startRangingBeacons(in: region)
-        locationManager.startMonitoring(for: region)
-        region.notifyEntryStateOnDisplay = true
+        locationManager.startRangingBeacons(in: BeaconManager.region)
+        locationManager.startMonitoring(for: BeaconManager.region)
+        BeaconManager.region.notifyEntryStateOnDisplay = true
         
         locationManager.delegate = self
     }
